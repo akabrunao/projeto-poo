@@ -9,14 +9,13 @@ package xadrez;
  *
  * @author Daniele
  */
-public class Testes {
+public class Xadrez {
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-
-       // Tabuleiro t = new Tabuleiro();
-       // t.printTabuleiro();
-        
-
-        
-
+        // TODO code application logic here
     }
+    
 }

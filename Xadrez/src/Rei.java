@@ -1,3 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package xadrez;
+
+/**
+ *
+ * @author Daniele
+ */
 //preciso fazer
 public class Rei {
     private boolean capturada;
@@ -9,46 +20,50 @@ public class Rei {
         setCor(cor);
         setCapturada(false);
 
-        if(cor == "branca") {
+        definePosicaoInicial();
+    }
+
+
+	public void definePosicaoInicial() {
+		if(cor == "branca") {
             setPosicao(0, 4);
         } else {
             setPosicao(7, 4);
         }
-    }
+	}
 
     
     public String desenha() {
         if (getCor() == "branca") {
-            return " r";
+            return "r  ";
         } else  { // cor == "preta"
-            return " R";
+            return "R  ";
         }
     }
 
     
     public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-        /**
-         * funciona, mas é bom refatorar depois
-         */
-        //retas
-        if (linhaOrigem - linhaDestino == 1 || linhaDestino - linhaOrigem == 1)
-            return true;
-        if (linhaOrigem - linhaDestino == -1 || linhaDestino - linhaOrigem == -1)
-            return true;
-        if (colunaOrigem - colunaDestino == 1 || colunaDestino - colunaOrigem == 1)
-            return true;
-        if (colunaOrigem - colunaDestino == -1 || colunaDestino - colunaOrigem == -1)
-            return true;
-        
-        // diagonais
-        if (linhaOrigem - linhaDestino == 1 && colunaOrigem - colunaDestino == -1)
-            return true;
-        if (linhaOrigem - linhaDestino == -1 && colunaOrigem - colunaDestino == 1)
-            return true;
-        if (linhaOrigem - linhaDestino == 1 && colunaOrigem - colunaDestino == 1)
-            return true;
-        if (linhaOrigem - linhaDestino == -1 && colunaOrigem - colunaDestino == -1)
-            return true;
+    	if (linhaDestino >= 0 && linhaDestino <= 7 && colunaDestino >= 0 && colunaDestino <= 7) {
+    		//retas
+    		if (linhaOrigem - linhaDestino == 1 || linhaDestino - linhaOrigem == 1)
+    			return true;
+    		if (linhaOrigem - linhaDestino == -1 || linhaDestino - linhaOrigem == -1)
+    			return true;
+    		if (colunaOrigem - colunaDestino == 1 || colunaDestino - colunaOrigem == 1)
+    			return true;
+    		if (colunaOrigem - colunaDestino == -1 || colunaDestino - colunaOrigem == -1)
+    			return true;
+    		
+    		// diagonais
+    		if (linhaOrigem - linhaDestino == 1 && colunaOrigem - colunaDestino == -1)
+    			return true;
+    		if (linhaOrigem - linhaDestino == -1 && colunaOrigem - colunaDestino == 1)
+    			return true;
+    		if (linhaOrigem - linhaDestino == 1 && colunaOrigem - colunaDestino == 1)
+    			return true;
+    		if (linhaOrigem - linhaDestino == -1 && colunaOrigem - colunaDestino == -1)
+    			return true;	
+    	}
 
         return false;
     }

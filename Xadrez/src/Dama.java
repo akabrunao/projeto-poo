@@ -1,5 +1,15 @@
-//preciso fazer
-public class Dama { //extends peca
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package xadrez;
+
+/**
+ *
+ * @author Bruno
+ */
+public class Dama {
 
     private boolean capturada;
     private String cor;
@@ -10,32 +20,41 @@ public class Dama { //extends peca
         setCor(cor);
         setCapturada(false);
         
-        if(cor == "branca") {
+        definePosicaoInicial();
+    }
+
+
+	public void definePosicaoInicial() {
+		if(cor == "branca") {
             setPosicao(0, 3);
         } else {
             setPosicao(7, 3);
         }
-    }
+	}
 
     
     public String desenha() {
         if (getCor() == "branca") {
-            return " d";
+            return "d  ";
         } else  { // cor == "preta"
-            return " D";
+            return "D  ";
         }
     }
 
     
     public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-        if (linhaOrigem == linhaDestino)
-            return true;
-        if (colunaOrigem == colunaDestino)
-            return true;
-        if ((linhaOrigem - linhaDestino) == (colunaOrigem - colunaDestino))
-            return true;
-        if ((linhaDestino - linhaOrigem) == (colunaDestino - colunaOrigem))
-            return true;
+    	//fora do tabuleiro
+    	if (linhaDestino >= 0 && linhaDestino <= 7 && colunaDestino >= 0 && colunaDestino <= 7) {
+    		//posicoes validas para a dama
+			if (linhaOrigem == linhaDestino)
+				return true;
+			if (colunaOrigem == colunaDestino)
+				return true;
+			if ((linhaOrigem - linhaDestino) == (colunaOrigem - colunaDestino))
+				return true;
+			if ((linhaDestino - linhaOrigem) == (colunaDestino - colunaOrigem))
+				return true;    		
+    	}
 
         return false;
     }

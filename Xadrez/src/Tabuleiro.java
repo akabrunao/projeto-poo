@@ -1,90 +1,168 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package xadrez;
+
 /**
- * Ainda não comecei a classe posição, bastante coisa daqui vai migrar pra lá.
+ *
+ * @author Daniele
+ */
+/**
+ * Ainda nÃ£o comecei a classe posiÃ§Ã£o, bastante coisa daqui vai migrar pra lÃ¡.
  * 
- * Utilizei int para as colunas por facilitar o calculo das posições, mas provavelmente o input 
+ * Utilizei int para as colunas por facilitar o calculo das posiÃ§Ãµes, mas provavelmente o input 
  * do usuario vai ser um char, a gente pode usar um enum para transformar o char em int.
  */
-public class Tabuleiro {
-    private String tabuleiro[][];
+public class Tabuleiro{
+    private Posicao[][] tabuleiro;
     
-    Dama db = new Dama("branca");
-    Dama dp = new Dama("preta");
-    Rei rb = new Rei("branca");
-    Rei rp = new Rei("preta");
-    Cavalo cbe = new Cavalo("branca", "esquerda");
-    Cavalo cpe = new Cavalo("preta", "esquerda");
-    Cavalo cbd = new Cavalo("branca", "direita");
-    Cavalo cpd = new Cavalo("preta", "direita");
 
     //Construtor
-    public Tabuleiro() {
-        tabuleiro = new String[64][64];
-        inicializaTabuleiro();
+    public Tabuleiro(Jogador j1, Jogador j2) {
+        tabuleiro = new Posicao[8][8];
+        inicializaTabuleiro(j1, j2);
     }
 
-    public void atualizaTabuleiro() {
-
+    public void atualizaTabuleiro(int linha, int coluna) {
+    	tabuleiro[linha][coluna].setDesenho(defineCorDaCasa(linha, coluna));
     }
 
     
-    private void inicializaTabuleiro() {
+    private void inicializaTabuleiro(Jogador j1, Jogador j2) {
         criaTabuleiro();
 
-        posicionaPecasParaInicioDoJogo();
+        posicionaPecasParaInicioDoJogo(j1, j2);
     }
+    
+    public void colocaPecaNoTabuleiro(Dama p) {
+    	Posicao pos = tabuleiro[p.getLinha()][p.getColuna()];
+    	
+        if(p.isCapturada() == false) {
+        	pos.setOcupada(true);
+            pos.setDesenho(p.desenha());
+        }
+    }
+    public void colocaPecaNoTabuleiroRei(Rei p) {
+    	Posicao pos = tabuleiro[p.getLinha()][p.getColuna()];
+    	
+        if(p.isCapturada() == false) {
+        	pos.setOcupada(true);
+            pos.setDesenho(p.desenha());
+        }
+    }
+    public void colocaPecaNoTabuleiroCv(Cavalo p) {
+    	Posicao pos = tabuleiro[p.getLinha()][p.getColuna()];
+    	
+        if(p.isCapturada() == false) {
+        	pos.setOcupada(true);
+            pos.setDesenho(p.desenha());
+        }
+    }
+    
+     public void colocaPecaNoTabuleiroTorre(Torre p) {
+    	 Posicao pos = tabuleiro[p.getLinha()][p.getColuna()];
+     	
+         if(p.isCapturada() == false) {
+         	pos.setOcupada(true);
+             pos.setDesenho(p.desenha());
+         }
+    }
+     
+     public void colocaPecaNoTabuleiroPeao(Peao p) {
+    	Posicao pos = tabuleiro[p.getLinha()][p.getColuna()];
+    	
+        if(p.isCapturada() == false) {
+        	pos.setOcupada(true);
+            pos.setDesenho(p.desenha());
+        }
+    }
+        
+     public void colocaPecaNoTabuleiroBispo(Bispo p) {
+    	Posicao pos = tabuleiro[p.getLinha()][p.getColuna()];
+    	
+        if(p.isCapturada() == false) {
+        	pos.setOcupada(true);
+            pos.setDesenho(p.desenha());
+        }
+    }
+     
+     
+    
+    
 
-
-    private void posicionaPecasParaInicioDoJogo() {
+    private void posicionaPecasParaInicioDoJogo(Jogador j1, Jogador j2) {
         //dama
-        colocaPecaNoTabuleiro(db);
-        colocaPecaNoTabuleiro(dp);
+        colocaPecaNoTabuleiro(j1.dama);
+        colocaPecaNoTabuleiro(j2.dama);
         //rei
-        colocaPecaNoTabuleiro(rb);
-        colocaPecaNoTabuleiro(rp);
+        colocaPecaNoTabuleiroRei(j1.rei);
+        colocaPecaNoTabuleiroRei(j2.rei);
         //cavalo
-        colocaPecaNoTabuleiro(cpe);
-        colocaPecaNoTabuleiro(cbe);
-        colocaPecaNoTabuleiro(cpd);
-        colocaPecaNoTabuleiro(cbd);
+        colocaPecaNoTabuleiroCv(j1.cd);
+        colocaPecaNoTabuleiroCv(j1.ce);
+        colocaPecaNoTabuleiroCv(j2.cd);
+        colocaPecaNoTabuleiroCv(j2.ce);
+        
+        colocaPecaNoTabuleiroTorre(j1.td);
+        colocaPecaNoTabuleiroTorre(j1.te);
+        colocaPecaNoTabuleiroTorre(j2.td);
+        colocaPecaNoTabuleiroTorre(j2.te);
+        
+        colocaPecaNoTabuleiroBispo(j1.bd);
+        colocaPecaNoTabuleiroBispo(j1.be);
+        colocaPecaNoTabuleiroBispo(j2.bd);
+        colocaPecaNoTabuleiroBispo(j2.be);
+       
+        
+        colocaPecaNoTabuleiroPeao(j1.p1);
+        colocaPecaNoTabuleiroPeao(j1.p2);
+        colocaPecaNoTabuleiroPeao(j1.p3);
+        colocaPecaNoTabuleiroPeao(j1.p4);
+        colocaPecaNoTabuleiroPeao(j1.p5);
+        colocaPecaNoTabuleiroPeao(j1.p6);
+        colocaPecaNoTabuleiroPeao(j1.p7);
+        colocaPecaNoTabuleiroPeao(j1.p8);
+        colocaPecaNoTabuleiroPeao(j2.p1);
+        colocaPecaNoTabuleiroPeao(j2.p2);
+        colocaPecaNoTabuleiroPeao(j2.p3);
+        colocaPecaNoTabuleiroPeao(j2.p4);
+        colocaPecaNoTabuleiroPeao(j2.p5);
+        colocaPecaNoTabuleiroPeao(j2.p6);
+        colocaPecaNoTabuleiroPeao(j2.p7);
+        colocaPecaNoTabuleiroPeao(j2.p8);
         /**
-         * Adicionar outras peças aqui conforme for criando,
-         * 1 chamadas para cada peça
+         * Adicionar outras peÃ§as aqui conforme for criando,
+         * 1 chamadas para cada peÃ§a
          */
     }
     
     
-    public void colocaPecaNoTabuleiro(Dama p) {
-        if(p.isCapturada() == false) {
-            tabuleiro[p.getLinha()][p.getColuna()] = p.desenha();
-        }
-    }
-    public void colocaPecaNoTabuleiro(Rei p) {
-        if(p.isCapturada() == false) {
-            tabuleiro[p.getLinha()][p.getColuna()] = p.desenha();
-        }
-    }
-    public void colocaPecaNoTabuleiro(Cavalo p) {
-        if(p.isCapturada() == false) {
-            tabuleiro[p.getLinha()][p.getColuna()] = p.desenha();
-        }
-    }
     
 
     private void criaTabuleiro() {
         for(int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                tabuleiro[i][j] = defineCorDaCasa(i, j);
+            	Posicao pos = new Posicao();
+            	pos.setColuna(j);
+            	pos.setLinha(i);
+            	pos.setCor(defineCorDaCasa(i, j));
+            	pos.setDesenho(defineCorDaCasa(i, j));
+            	pos.setOcupada(false);
+            	
+                tabuleiro[i][j] = pos;
             }
         }
     }
 
-    private String defineCorDaCasa(int i, int j) {
+    public String defineCorDaCasa(int i, int j) {
         if ((i % 2 == 0) && (j % 2 == 0)) { //se os dois forem pares
-            return casaBranca();
+            return " + ";
         } else if ((i % 2 == 1) && (j % 2 == 1)) { //se os dois fore impares
-            return casaBranca();
+            return " + ";
         } else { //se forem diferentes
-            return casaPreta();
+            return " - " ;
         }
     }
 
@@ -92,8 +170,9 @@ public class Tabuleiro {
     public void printTabuleiro() {
         int count = 0;
         for(int i = 0; i < 8; i++) {
+        	System.out.printf("%d   ", i);
             for (int j = 0; j < 8; j++) {
-                System.out.print(tabuleiro[i][j]);
+                System.out.print(tabuleiro[i][j].getDesenho());
                 count++;
                 if (count == 8) {
                     System.out.printf("\n");
@@ -101,12 +180,7 @@ public class Tabuleiro {
                 }
             }
         }
+       System.out.printf("\n     a  b  c  d  e  f  g  h\n");
     }
     
-    public String casaBranca() {
-        return "⬜";
-    }
-    private String casaPreta() {
-        return "⬛";
-    }
 }
