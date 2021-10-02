@@ -6,8 +6,9 @@
 package xadrez;
 
 /**
+ * Classe que armazena todas as informações de cada função
  *
- * @author Daniele
+ * @author Bruno
  */
 public class Posicao {
     private String cor;

@@ -11,11 +11,9 @@ package xadrez;
  */
 public class Testes {
     public static void main(String[] args) {
-
-       // Tabuleiro t = new Tabuleiro();
-       // t.printTabuleiro();
         
-
+        Jogo xadrez = new Jogo();
+        xadrez.iniciarJogo();
         
 
     }
