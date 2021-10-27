@@ -6,24 +6,20 @@
 package xadrez;
 
 /**
- * Classe responsável pela peça "Peao"
+ * Classe respons�vel pela pe�a "Peao"
  *
  * @author Daniele
  */
-public class Peao {
-	private boolean capturada;
-	private String cor;
+public class Peao extends Peca {
 	private int num;
-	private int linha;
-	private int coluna;
-	private boolean estadoInicial; // Guarda se é a primeira jogada do peao
+	private boolean estadoInicial; // Guarda se � a primeira jogada do peao
 
 	/**
-	 * Construtor do peao, responsável por inicializar os atributos e definir a
-	 * posição inicial da peça no inicio do jogo.
+	 * Construtor do peao, respons�vel por inicializar os atributos e definir a
+	 * posi��o inicial da pe�a no inicio do jogo.
 	 * 
-	 * @param cor recebe a cor da peça
-	 * @param num recebe o id do peão
+	 * @param cor recebe a cor da pe�a
+	 * @param num recebe o id do pe�o
 	 */
 	public Peao(String cor, int num) {
 		setCor(cor);
@@ -34,7 +30,7 @@ public class Peao {
 	}
 
 	/**
-	 * De acordo com os atributos da peça, retorna o desenho correspondente para que
+	 * De acordo com os atributos da pe�a, retorna o desenho correspondente para que
 	 * possa ser impresso no tabuleiro
 	 * 
 	 * @return Uma String com o desenho correspondente
@@ -48,51 +44,67 @@ public class Peao {
 	}
 
 	/**
-	 * Checa se a posição informada pelo jogador pertence ao tabuleiro, e então
-	 * verifica se o movimento é válido de acordo com as regras da peça
+	 * Checa se a posi��o informada pelo jogador pertence ao tabuleiro, e ent�o
+	 * verifica se o movimento � v�lido de acordo com as regras da pe�a
 	 * 
-	 * @param linhaOrigem   A linha da posição que a peça estava
-	 * @param colunaOrigem  A coluna da posição que a peça estava
-	 * @param linhaDestino  A linha da posição que a peça irá
-	 * @param colunaDestino A coluna da posição que a peça irá
-	 * @return true caso o movimento seja válido, false se o movimento for inválido
+	 * @param linhaOrigem   A linha da posi��o que a pe�a estava
+	 * @param colunaOrigem  A coluna da posi��o que a pe�a estava
+	 * @param linhaDestino  A linha da posi��o que a pe�a ir�
+	 * @param colunaDestino A coluna da posi��o que a pe�a ir�
+	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if (linhaDestino >= 0 && linhaDestino <= 7 && colunaDestino >= 0 && colunaDestino <= 7)
-			if (linhaDestino - linhaOrigem == 1 && colunaOrigem == colunaDestino)
+		if (this.getCor() == "branca") {
+			if ((linhaDestino - linhaOrigem) == 1 && colunaOrigem == colunaDestino)
 				return true;
+		} else {
+			if ((linhaOrigem - linhaDestino) == 1 && colunaOrigem == colunaDestino)
+				return true;
+		}
 
 		return false;
 	}
 
 	/**
-	 * Checa se a posição informada pelo jogador pertence ao tabuleiro, e então
-	 * verifica se o movimento é válido de acordo com as regras da peça
+	 * Checa se a posi��o informada pelo jogador pertence ao tabuleiro, e ent�o
+	 * verifica se o movimento � v�lido de acordo com as regras da pe�a
 	 * 
-	 * @param linhaOrigem    A linha da posição que a peça estava
-	 * @param colunaOrigem   A coluna da posição que a peça estava
-	 * @param linhaDestino   A linha da posição que a peça irá
-	 * @param colunaDestino  A coluna da posição que a peça irá
+	 * @param linhaOrigem    A linha da posi��o que a pe�a estava
+	 * @param colunaOrigem   A coluna da posi��o que a pe�a estava
+	 * @param linhaDestino   A linha da posi��o que a pe�a ir�
+	 * @param colunaDestino  A coluna da posi��o que a pe�a ir�
 	 * @param primeiraJogada Se for o seu primeiro movimento, o peao pode andar duas
 	 *                       casas para frente, esse parametro recebe true caso seja
 	 *                       a primeira jogada
-	 * @return true caso o movimento seja válido, false se o movimento for inválido
+	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
-	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino, boolean primeiraJogada) {
-		if (linhaDestino >= 0 && linhaDestino <= 7 && colunaDestino >= 0 && colunaDestino <= 7)
+	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino,
+			boolean primeiraJogada) {
+		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
 			if (primeiraJogada) {
-				if ((Math.abs(linhaDestino - linhaOrigem) == 1 || Math.abs(linhaDestino - linhaOrigem) == 2)
-						&& colunaOrigem == colunaDestino)
+				if (this.getCor() == "branca") {
+					if (((linhaDestino - linhaOrigem) == 1 || (linhaDestino - linhaOrigem) == 2) && colunaOrigem == colunaDestino)
+						return true;
+				} else {
+					if (((linhaOrigem - linhaDestino) == 1 || (linhaOrigem - linhaDestino) == 2) && colunaOrigem == colunaDestino)
+						return true;
+				}
+				return false;
+			}
+			if (this.getCor() == "branca") {
+				if ((linhaDestino - linhaOrigem) == 1 && colunaOrigem == colunaDestino)
+					return true;
+			} else {
+				if ((linhaOrigem - linhaDestino) == 1 && colunaOrigem == colunaDestino)
 					return true;
 			}
-		if (Math.abs(linhaDestino - linhaOrigem) == 1 && colunaOrigem == colunaDestino)
-			return true;
+		}
 
 		return false;
 	}
 
 	/**
-	 * De acordo com os atributos da peça, faz o set da posição que ela deverá estar
+	 * De acordo com os atributos da pe�a, faz o set da posi��o que ela dever� estar
 	 * no inicio do jogo
 	 */
 	public void definePosicaoInicial() {
@@ -110,35 +122,6 @@ public class Peao {
 
 	public void setNum(int num) {
 		this.num = num;
-	}
-
-	public boolean isCapturada() {
-		return this.capturada;
-	}
-
-	public void setPosicao(int linha, int coluna) {
-		this.linha = linha;
-		this.coluna = coluna;
-	}
-
-	public int getLinha() {
-		return linha;
-	}
-
-	public int getColuna() {
-		return coluna;
-	}
-
-	public void setCapturada(boolean capturada) {
-		this.capturada = capturada;
-	}
-
-	public String getCor() {
-		return cor;
-	}
-
-	public void setCor(String cor) {
-		this.cor = cor;
 	}
 
 	public boolean isEstadoInicial() {

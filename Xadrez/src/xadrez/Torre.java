@@ -6,23 +6,19 @@
 package xadrez;
 
 /**
- * Classe responsÃ¡vel pela peÃ§a "Torre"
+ * Classe responsável pela peça "Torre"
  *
  * @author Daniele
  */
-public class Torre {
-    private boolean capturada;
-    private String cor;
+public class Torre extends Peca {
     private String lado;
-    private int linha;
-    private int coluna;
 
 	/**
-	 * Construtor da torre, responsÃ¡vel por inicializar os atributos e definir a
-	 * posiÃ§Ã£o inicial da peÃ§a no inicio do jogo.
+	 * Construtor da torre, responsável por inicializar os atributos e definir a
+	 * posição inicial da peça no inicio do jogo.
 	 * 
-	 * @param cor  Cor da peÃ§a (branca/preta)
-	 * @param lado Informa se a torre Ã© a esquerda ou a direita
+	 * @param cor  Cor da peça (branca/preta)
+	 * @param lado Informa se a torre é a esquerda ou a direita
 	 */
     public Torre(String cor, String lado) {
         setCor(cor);
@@ -32,7 +28,7 @@ public class Torre {
     }
 
 	/**
-	 * De acordo com os atributos da peÃ§a, retorna o desenho correspondente para que
+	 * De acordo com os atributos da peça, retorna o desenho correspondente para que
 	 * possa ser impresso no tabuleiro
 	 * 
 	 * @return Uma String com o desenho correspondente
@@ -54,17 +50,17 @@ public class Torre {
     }
 
 	/**
-	 * Checa se a posiÃ§Ã£o informada pelo jogador pertence ao tabuleiro, e entÃ£o
-	 * verifica se o movimento Ã© vÃ¡lido de acordo com as regras da peÃ§a
+	 * Checa se a posição informada pelo jogador pertence ao tabuleiro, e então
+	 * verifica se o movimento é válido de acordo com as regras da peça
 	 * 
-	 * @param linhaOrigem   A linha da posiÃ§Ã£o que a peÃ§a estava
-	 * @param colunaOrigem  A coluna da posiÃ§Ã£o que a peÃ§a estava
-	 * @param linhaDestino  A linha da posiÃ§Ã£o que a peÃ§a irÃ¡
-	 * @param colunaDestino A coluna da posiÃ§Ã£o que a peÃ§a irÃ¡
-	 * @return true caso o movimento seja vÃ¡lido, false se o movimento for invÃ¡lido
+	 * @param linhaOrigem   A linha da posição que a peça estava
+	 * @param colunaOrigem  A coluna da posição que a peça estava
+	 * @param linhaDestino  A linha da posição que a peça irá
+	 * @param colunaDestino A coluna da posição que a peça irá
+	 * @return true caso o movimento seja válido, false se o movimento for inválido
 	 */
     public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-    	if (linhaDestino >= 0 && linhaDestino <= 7 && colunaDestino >= 0 && colunaDestino <= 7) {
+    	if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
     		//Linhas retas
     		if (linhaOrigem == linhaDestino)
     			return true;
@@ -75,7 +71,7 @@ public class Torre {
     }
     
 	/**
-	 * De acordo com os atributos da peÃ§a, faz o set da posiÃ§Ã£o que ela deverÃ¡ estar
+	 * De acordo com os atributos da peça, faz o set da posição que ela deverá estar
 	 * no inicio do jogo
 	 */
 	public void definePosicaoInicial() {
@@ -103,36 +99,4 @@ public class Torre {
     public void setLado(String lado) {
         this.lado = lado;
     }
-
-	
-    public boolean isCapturada() {
-        return this.capturada;
-    }
-
-    public void setPosicao(int linha, int coluna) {
-        this.linha = linha;
-        this.coluna = coluna;
-    }
-
-    public int getLinha() {
-        return linha;
-    }
-
-    public int getColuna() {
-        return coluna;
-    }
-    
-    public void setCapturada(boolean capturada) {
-        this.capturada = capturada;
-    }
-    
-    public String getCor() {
-        return cor;
-    }
-    
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
-
-
 }

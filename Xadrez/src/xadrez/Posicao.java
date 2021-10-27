@@ -14,9 +14,11 @@ public class Posicao {
     private String cor;
     private int linha;
     private int coluna;
-    private String peca;
+    private Peca peca;
     private String desenho;
     private boolean ocupada;
+
+	
     
     
     
@@ -38,11 +40,12 @@ public class Posicao {
 	public void setColuna(int coluna) {
 		this.coluna = coluna;
 	}
-	public String getPeca() {
+	public Peca getPeca() {
 		return peca;
 	}
-	public void setPeca(String peca) {
+	public void setPeca(Peca peca) {
 		this.peca = peca;
+		setDesenho(peca.desenha());
 	}
 	public String getDesenho() {
 		return desenho;

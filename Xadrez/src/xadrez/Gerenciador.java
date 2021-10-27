@@ -9,7 +9,7 @@ package xadrez;
  *
  * @author Daniele
  */
-public class Xadrez {
+public class Gerenciador {
 
     /**
      * @param args the command line arguments

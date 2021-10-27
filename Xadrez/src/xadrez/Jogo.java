@@ -8,7 +8,7 @@ package xadrez;
 import java.util.Scanner;
 
 /**
- * Classe que lida com tudo relacionado ao jogo, como a inicialização do mesmo e
+ * Classe que lida com tudo relacionado ao jogo, como a inicializa��o do mesmo e
  * o gerenciamento das jogadas.
  *
  * @author Daniele
@@ -35,14 +35,14 @@ public class Jogo {
 	}
 
 	/**
-	 * Método que cria os dois jogadores e o tabuleiro para que o jogo possa ser
+	 * M�todo que cria os dois jogadores e o tabuleiro para que o jogo possa ser
 	 * inicializado.
 	 */
 	public void iniciarJogo() {
 		// Inicializa o programa e recolhe os nomes dos jogadores
 		System.out.println("Programa rodando...");
 		System.out.println("BEM VINDO AO JOGO DE XADREZ!");
-		System.out.println("Por gentileza, insira o nome do jogador 1 (peças brancas):");
+		System.out.println("Por gentileza, insira o nome do jogador 1 (pe�as brancas):");
 
 		// Cria os jogadores
 		Jogador[] jogador = new Jogador[2];
@@ -50,7 +50,7 @@ public class Jogo {
 		jogador[0] = new Jogador("branca");
 		nome = scanner.nextLine();
 		jogador[0].setNomeJogador(this.getNome());
-		System.out.println("Por gentileza, insira o nome do jogador 2 (peças pretas):");
+		System.out.println("Por gentileza, insira o nome do jogador 2 (pe�as pretas):");
 		jogador[1] = new Jogador("preta");
 		nome = scanner.nextLine();
 		jogador[1].setNomeJogador(this.getNome());
@@ -58,12 +58,12 @@ public class Jogo {
 		// Cria o tabuleiro
 		Tabuleiro tb = new Tabuleiro(jogador[0], jogador[1]);
 
-		// Chama a função para jogar
+		// Chama a fun��o para jogar
 		jogar(jogador, tb);
 	}
 
 	/**
-	 * Método que faz uma chamada ao tabuleiro para que o mesmo seja impresso na
+	 * M�todo que faz uma chamada ao tabuleiro para que o mesmo seja impresso na
 	 * tela.
 	 * 
 	 * @param tb Recebe o tabuleiro para que a chamada possa ser executada
@@ -75,15 +75,15 @@ public class Jogo {
 	}
 
 	/**
-	 * Método que lê uma coordenada e checa se a peça pode ser movida para essa
-	 * posição, e então executa o movimento
+	 * M�todo que l� uma coordenada e checa se a pe�a pode ser movida para essa
+	 * posi��o, e ent�o executa o movimento
 	 * 
-	 * @param j1            Recebe o jogador que terá sua peça movida
-	 * @param peao          Recebe a peça que será movida
+	 * @param j1            Recebe o jogador que ter� sua pe�a movida
+	 * @param peao          Recebe a pe�a que ser� movida
 	 * @param tb            Recebe o tabuleiro
 	 * @param estadoInicial Recebe true caso seja o primeiro movimento deste peao
 	 * 
-	 * @return true caso o movimento seja executado, false caso contrário
+	 * @return true caso o movimento seja executado, false caso contr�rio
 	 */
 	public boolean moverPosicaoPeao(Jogador j1, Peao peao, Tabuleiro tb, boolean estadoInicial) {
 		System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
@@ -93,29 +93,29 @@ public class Jogo {
 		int coluna = peao.getColuna();
 
 		if (peao.checaMovimento(linha, coluna, c1, c2, estadoInicial)) {
-			System.out.println("Movimento válido!");
+			System.out.println("Movimento v�lido!");
 			peao.setPosicao(c1, c2);
 			tb.atualizaTabuleiro(linha, coluna);
-			tb.colocaPecaNoTabuleiroPeao(peao);
+			tb.colocaPecaNoTabuleiro(peao);
 			if (estadoInicial) {
 				peao.setEstadoInicial(false);
 			}
 			return true;
 		} else {
-			System.out.println("Movimento inválido! Por favor, insira uma coordenada válida!");
+			System.out.println("Movimento inv�lido! Por favor, insira uma coordenada v�lida!");
 		}
 		return false;
 	}
 
 	/**
-	 * Método que lê uma coordenada e checa se a peça pode ser movida para essa
-	 * posição, e então executa o movimento
+	 * M�todo que l� uma coordenada e checa se a pe�a pode ser movida para essa
+	 * posi��o, e ent�o executa o movimento
 	 * 
-	 * @param j1    Recebe o jogador que terá sua peça movida
-	 * @param bispo Recebe a peça que será movida
+	 * @param j1    Recebe o jogador que ter� sua pe�a movida
+	 * @param bispo Recebe a pe�a que ser� movida
 	 * @param tb    Recebe o tabuleiro
 	 * 
-	 * @return true caso o movimento seja executado, false caso contrário
+	 * @return true caso o movimento seja executado, false caso contr�rio
 	 */
 	public boolean moverPosicaoBispo(Jogador j1, Bispo bispo, Tabuleiro tb) {
 		System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
@@ -125,26 +125,26 @@ public class Jogo {
 		int coluna = bispo.getColuna();
 
 		if (bispo.checaMovimento(linha, coluna, c1, c2)) {
-			System.out.println("Movimento válido!");
+			System.out.println("Movimento v�lido!");
 			bispo.setPosicao(c1, c2);
 			tb.atualizaTabuleiro(linha, coluna);
-			tb.colocaPecaNoTabuleiroBispo(bispo);
+			tb.colocaPecaNoTabuleiro(bispo);
 			return true;
 		} else {
-			System.out.println("Movimento inválido! Por favor, insira uma coordenada válida!");
+			System.out.println("Movimento inv�lido! Por favor, insira uma coordenada v�lida!");
 		}
 		return false;
 	}
 
 	/**
-	 * Método que lê uma coordenada e checa se a peça pode ser movida para essa
-	 * posição, e então executa o movimento
+	 * M�todo que l� uma coordenada e checa se a pe�a pode ser movida para essa
+	 * posi��o, e ent�o executa o movimento
 	 * 
-	 * @param j1     Recebe o jogador que terá sua peça movida
-	 * @param cavalo Recebe a peça que será movida
+	 * @param j1     Recebe o jogador que ter� sua pe�a movida
+	 * @param cavalo Recebe a pe�a que ser� movida
 	 * @param tb     Recebe o tabuleiro
 	 * 
-	 * @return true caso o movimento seja executado, false caso contrário
+	 * @return true caso o movimento seja executado, false caso contr�rio
 	 */
 	public boolean moverPosicaoCavalo(Jogador j1, Cavalo cavalo, Tabuleiro tb) {
 		System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
@@ -154,26 +154,26 @@ public class Jogo {
 		int coluna = cavalo.getColuna();
 
 		if (cavalo.checaMovimento(linha, coluna, c1, c2)) {
-			System.out.println("Movimento válido!");
+			System.out.println("Movimento v�lido!");
 			cavalo.setPosicao(c1, c2);
 			tb.atualizaTabuleiro(linha, coluna);
-			tb.colocaPecaNoTabuleiroCv(cavalo);
+			tb.colocaPecaNoTabuleiro(cavalo);
 			return true;
 		} else {
-			System.out.println("Movimento inválido! Por favor, insira uma coordenada válida!");
+			System.out.println("Movimento inv�lido! Por favor, insira uma coordenada v�lida!");
 		}
 		return false;
 	}
 
 	/**
-	 * Método que lê uma coordenada e checa se a peça pode ser movida para essa
-	 * posição, e então executa o movimento
+	 * M�todo que l� uma coordenada e checa se a pe�a pode ser movida para essa
+	 * posi��o, e ent�o executa o movimento
 	 * 
-	 * @param j1   Recebe o jogador que terá sua peça movida
-	 * @param dama Recebe a peça que será movida
+	 * @param j1   Recebe o jogador que ter� sua pe�a movida
+	 * @param dama Recebe a pe�a que ser� movida
 	 * @param tb   Recebe o tabuleiro
 	 * 
-	 * @return true caso o movimento seja executado, false caso contrário
+	 * @return true caso o movimento seja executado, false caso contr�rio
 	 */
 	public boolean moverPosicaoDama(Jogador j1, Dama dama, Tabuleiro tb) {
 		System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
@@ -183,26 +183,26 @@ public class Jogo {
 		int coluna = dama.getColuna();
 
 		if (dama.checaMovimento(linha, coluna, c1, c2)) {
-			System.out.println("Movimento válido!");
+			System.out.println("Movimento v�lido!");
 			dama.setPosicao(c1, c2);
 			tb.atualizaTabuleiro(linha, coluna);
-			tb.colocaPecaNoTabuleiroDama(dama);
+			tb.colocaPecaNoTabuleiro(dama);
 			return true;
 		} else {
-			System.out.println("Movimento inválido! Por favor, insira uma coordenada válida!");
+			System.out.println("Movimento inv�lido! Por favor, insira uma coordenada v�lida!");
 		}
 		return false;
 	}
 
 	/**
-	 * Método que lê uma coordenada e checa se a peça pode ser movida para essa
-	 * posição, e então executa o movimento
+	 * M�todo que l� uma coordenada e checa se a pe�a pode ser movida para essa
+	 * posi��o, e ent�o executa o movimento
 	 * 
-	 * @param j1  Recebe o jogador que terá sua peça movida
-	 * @param rei Recebe a peça que será movida
+	 * @param j1  Recebe o jogador que ter� sua pe�a movida
+	 * @param rei Recebe a pe�a que ser� movida
 	 * @param tb  Recebe o tabuleiro
 	 * 
-	 * @return true caso o movimento seja executado, false caso contrário
+	 * @return true caso o movimento seja executado, false caso contr�rio
 	 */
 	public boolean moverPosicaoRei(Jogador j1, Rei rei, Tabuleiro tb) {
 		System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
@@ -212,26 +212,26 @@ public class Jogo {
 		int coluna = rei.getColuna();
 
 		if (rei.checaMovimento(linha, coluna, c1, c2)) {
-			System.out.println("Movimento válido!");
+			System.out.println("Movimento v�lido!");
 			rei.setPosicao(c1, c2);
 			tb.atualizaTabuleiro(linha, coluna);
-			tb.colocaPecaNoTabuleiroRei(rei);
+			tb.colocaPecaNoTabuleiro(rei);
 			return true;
 		} else {
-			System.out.println("Movimento inválido! Por favor, insira uma coordenada válida!");
+			System.out.println("Movimento inv�lido! Por favor, insira uma coordenada v�lida!");
 		}
 		return false;
 	}
 
 	/**
-	 * Método que lê uma coordenada e checa se a peça pode ser movida para essa
-	 * posição, e então executa o movimento
+	 * M�todo que l� uma coordenada e checa se a pe�a pode ser movida para essa
+	 * posi��o, e ent�o executa o movimento
 	 * 
-	 * @param j1    Recebe o jogador que terá sua peça movida
-	 * @param torre Recebe a peça que será movida
+	 * @param j1    Recebe o jogador que ter� sua pe�a movida
+	 * @param torre Recebe a pe�a que ser� movida
 	 * @param tb    Recebe o tabuleiro
 	 * 
-	 * @return true caso o movimento seja executado, false caso contrário
+	 * @return true caso o movimento seja executado, false caso contr�rio
 	 */
 	public boolean moverPosicaoTorre(Jogador j1, Torre torre, Tabuleiro tb) {
 		System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
@@ -241,33 +241,33 @@ public class Jogo {
 		int coluna = torre.getColuna();
 
 		if (torre.checaMovimento(linha, coluna, c1, c2)) {
-			System.out.println("Movimento válido!");
+			System.out.println("Movimento v�lido!");
 			torre.setPosicao(c1, c2);
 			tb.atualizaTabuleiro(linha, coluna);
-			tb.colocaPecaNoTabuleiroTorre(torre);
+			tb.colocaPecaNoTabuleiro(torre);
 			return true;
 		} else {
-			System.out.println("Movimento inválido! Por favor, insira uma coordenada válida!");
+			System.out.println("Movimento inv�lido! Por favor, insira uma coordenada v�lida!");
 		}
 		return false;
 	}
 
 	/**
-	 * Método que lida com o jogo, gerenciando todas as jogadas.
+	 * M�todo que lida com o jogo, gerenciando todas as jogadas.
 	 * 
 	 * @param jogador Recebe os dois jogadores do jogo
 	 * @param tb      Recebe o tabuleiro
 	 */
 	public void jogar(Jogador[] jogador, Tabuleiro tb) {
 		while (true) {
-			System.out.println("Entre com sua opção: (1) INICIAR JOGO / (2) SAIR");
+			System.out.println("Entre com sua op��o: (1) INICIAR JOGO / (2) SAIR");
 			int op = scanner.nextInt();
 			switch (op) {
 			case 1:
 				int i = 0;
 				while (true) {
 					System.out.println("Vez do jogador: " + jogador[i].getNomeJogador());
-					System.out.println("Escolha uma peãa disponível: ");
+					System.out.println("Escolha uma pe�a dispon�vel: ");
 					printarTabuleiro(tb);
 					nome = scanner.next();
 					nome = nome.toLowerCase();

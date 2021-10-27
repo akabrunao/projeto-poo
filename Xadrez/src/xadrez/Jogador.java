@@ -6,7 +6,7 @@
 package xadrez;
 
 /**
- * Classe respons√°vel por criar os dois jogadores junto com suas pe√ßas
+ * Classe respons·vel por criar os dois jogadores junto com suas peÁas
  *
  * @author Daniele
  */
@@ -15,7 +15,7 @@ public class Jogador{
     private float pontuacaoJogador;
     private String corJogador;
     
-    // instanciando pe√ßas
+    // instanciando peÁas
     Dama dama = new Dama(this.getCorJogador());
     
     Rei rei = new Rei(this.getCorJogador());
@@ -40,9 +40,9 @@ public class Jogador{
 
     Cavalo ce = new Cavalo(this.getCorJogador(), "esquerda");
     Cavalo cd = new Cavalo(this.getCorJogador(), "direita");
-
+   
     /**
-     * Construtor do jogador, respons√°vel por setar a cor e definir parametros de suas pe√ßas
+     * Construtor do jogador, respons·vel por setar a cor e definir parametros de suas peÁas
      * 
      * @param cor Recebe a cor do jogador (branca/preta)
      */
@@ -53,7 +53,7 @@ public class Jogador{
     }
     
     /**
-     * Atribui para cada pe√ßa a sua devida posi√ß√£o inicial
+     * Atribui para cada peÁa a sua devida posiÁ„o inicial
      */
     public void definePosicaoInicial() {
     	dama.definePosicaoInicial();
@@ -75,7 +75,7 @@ public class Jogador{
     }
     
     /**
-     * Para cada pe√ßa do jogador, faz o set da sua cor
+     * Para cada peÁa do jogador, faz o set da sua cor
      */
     public void atualizarCorPecas(){
        dama.setCor(this.getCorJogador());
