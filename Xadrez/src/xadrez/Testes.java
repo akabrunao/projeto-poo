@@ -155,7 +155,7 @@ public class Testes {
 
 		// Teste 18
 		System.out.println("Teste 18");
-		if (peao.checaMovimento(0, 0, 2, 0, true) == true) {
+		if (peao.checaMovimento(0, 0, 2, 0) == true) {
 			System.out.println("Pass!\n");
 		} else {
 			System.out.println("Fail!!!!!\n");
@@ -163,7 +163,7 @@ public class Testes {
 
 		// Teste 19
 		System.out.println("Teste 19");
-		if (peao.checaMovimento(0, 0, 2, 0, false) == false) {
+		if (peao.checaMovimento(0, 0, 2, 0) == false) {
 			System.out.println("Pass!\n");
 		} else {
 			System.out.println("Fail!!!!!\n");
@@ -365,10 +365,10 @@ public class Testes {
 		System.out.println("Teste 38");
 		Peao outroPeao = new Peao("branca", 5);
 		outroPeao.definePosicaoInicial();
-		System.out.printf("5º peao branco - %d %d\n", outroPeao.getLinha(), outroPeao.getColuna());
+		System.out.printf("5ï¿½ peao branco - %d %d\n", outroPeao.getLinha(), outroPeao.getColuna());
 		outroPeao.setCor("preta");
 		outroPeao.definePosicaoInicial();
-		System.out.printf("5º peao Preto - %d %d\n", outroPeao.getLinha(), outroPeao.getColuna());
+		System.out.printf("5ï¿½ peao Preto - %d %d\n", outroPeao.getLinha(), outroPeao.getColuna());
 
 		Jogo jogo = new Jogo();
 		jogo.iniciarJogo();

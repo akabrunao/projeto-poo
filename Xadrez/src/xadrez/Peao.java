@@ -43,27 +43,13 @@ public class Peao extends Peca {
 		}
 	}
 
-	/**
-	 * Checa se a posi��o informada pelo jogador pertence ao tabuleiro, e ent�o
-	 * verifica se o movimento � v�lido de acordo com as regras da pe�a
-	 * 
-	 * @param linhaOrigem   A linha da posi��o que a pe�a estava
-	 * @param colunaOrigem  A coluna da posi��o que a pe�a estava
-	 * @param linhaDestino  A linha da posi��o que a pe�a ir�
-	 * @param colunaDestino A coluna da posi��o que a pe�a ir�
-	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
-	 */
-	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if (this.getCor() == "branca") {
-			if ((linhaDestino - linhaOrigem) == 1 && colunaOrigem == colunaDestino)
-				return true;
-		} else {
-			if ((linhaOrigem - linhaDestino) == 1 && colunaOrigem == colunaDestino)
-				return true;
-		}
-
-		return false;
-	}
+	public boolean primeiraJogada(){
+            if(this.estadoInicial){
+                this.estadoInicial = false;
+                return true;
+            }
+            return false;
+        }
 
 	/**
 	 * Checa se a posi��o informada pelo jogador pertence ao tabuleiro, e ent�o
@@ -73,15 +59,11 @@ public class Peao extends Peca {
 	 * @param colunaOrigem   A coluna da posi��o que a pe�a estava
 	 * @param linhaDestino   A linha da posi��o que a pe�a ir�
 	 * @param colunaDestino  A coluna da posi��o que a pe�a ir�
-	 * @param primeiraJogada Se for o seu primeiro movimento, o peao pode andar duas
-	 *                       casas para frente, esse parametro recebe true caso seja
-	 *                       a primeira jogada
-	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
+	 * * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
-	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino,
-			boolean primeiraJogada) {
+	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
-			if (primeiraJogada) {
+			if (primeiraJogada()) {
 				if (this.getCor() == "branca") {
 					if (((linhaDestino - linhaOrigem) == 1 || (linhaDestino - linhaOrigem) == 2) && colunaOrigem == colunaDestino)
 						return true;
