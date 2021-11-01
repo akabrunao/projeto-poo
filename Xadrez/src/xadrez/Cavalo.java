@@ -20,7 +20,8 @@ public class Cavalo extends Peca {
 	 * @param cor  Cor da pe�a (branca/preta)
 	 * @param lado Informa se o cavalo � o esquerdo ou o direito
 	 */
-	public Cavalo(String cor, String lado) {
+	public Cavalo(String cor, String lado, Tabuleiro tabuleiro) {
+		setTabuleiro(tabuleiro);
 		setCor(cor);
 		setCapturada(false);
 		setLado(lado);

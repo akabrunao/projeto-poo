@@ -7,7 +7,6 @@ package xadrez;
 
 import java.util.Scanner;
 
-
 /**
  * Classe que lida com tudo relacionado ao jogo, como a inicializa��o do mesmo e
  * o gerenciamento das jogadas.
@@ -18,30 +17,21 @@ public class Jogo {
 
 	Scanner scanner = new Scanner(System.in);
 
-	
 	/**
 	 * M�todo que cria os dois jogadores e o tabuleiro para que o jogo possa ser
 	 * inicializado.
 	 */
-	public void iniciarJogo() {
+	public void iniciarJogo(Jogador[] jogador) {
 		// Inicializa o programa e recolhe os nomes dos jogadores
 		System.out.println("Programa rodando...");
 		System.out.println("BEM VINDO AO JOGO DE XADREZ!");
 		System.out.println("Por gentileza, insira o nome do jogador 1 (pe�as brancas):");
 
-		// Cria os jogadores
-		Jogador[] jogador = new Jogador[2];
-
-		jogador[0] = new Jogador("branca");
-		String nome = scanner.nextLine();
-		jogador[0].setNomeJogador(nome);
-		System.out.println("Por gentileza, insira o nome do jogador 2 (pe�as pretas):");
-		jogador[1] = new Jogador("preta");
-		nome = scanner.nextLine();
-		jogador[1].setNomeJogador(nome);
-
 		// Cria o tabuleiro
 		Tabuleiro tb = new Tabuleiro(jogador[0], jogador[1]);
+
+		jogador[0].inicializaJogador(tb);
+		jogador[1].inicializaJogador(tb);
 
 		// Chama a fun��o para jogar
 		jogar(jogador, tb);
@@ -63,17 +53,17 @@ public class Jogo {
 	 * M�todo que l� uma coordenada e checa se a pe�a pode ser movida para essa
 	 * posi��o, e ent�o executa o movimento
 	 * 
-	 * @param j1    Recebe o jogador que ter� sua pe�a movida
-	 * @param p Recebe a pe�a que ser� movida
-	 * @param tb    Recebe o tabuleiro
+	 * @param j1 Recebe o jogador que ter� sua pe�a movida
+	 * @param p  Recebe a pe�a que ser� movida
+	 * @param tb Recebe o tabuleiro
 	 * 
 	 * @return true caso o movimento seja executado, false caso contr�rio
 	 */
 
-        private boolean moverPosicao(Jogador j1, Peca p, Tabuleiro tb) {
+	private boolean moverPosicao(Jogador j1, Peca p, Tabuleiro tb) {
 		System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
 		int c1 = scanner.nextInt();
-                char letra = scanner.nextLine().charAt(1);
+		char letra = scanner.nextLine().charAt(1);
 		int c2 = letra - 97;
 		int linha = p.getLinha();
 		int coluna = p.getColuna();
@@ -89,8 +79,6 @@ public class Jogo {
 		}
 		return false;
 	}
-        
-        
 
 	/**
 	 * M�todo que lida com o jogo, gerenciando todas as jogadas.
@@ -113,67 +101,83 @@ public class Jogo {
 					nome = nome.toLowerCase();
 					switch (nome) {
 					case "p1":
-						while (!moverPosicao(jogador[i], jogador[i].p1, tb));
+						while (!moverPosicao(jogador[i], jogador[i].p1, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "p2":
-						while (!moverPosicao(jogador[i], jogador[i].p2, tb));
+						while (!moverPosicao(jogador[i], jogador[i].p2, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "p3":
-						while (!moverPosicao(jogador[i], jogador[i].p3, tb));
+						while (!moverPosicao(jogador[i], jogador[i].p3, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "p4":
-						while (!moverPosicao(jogador[i], jogador[i].p4, tb));
+						while (!moverPosicao(jogador[i], jogador[i].p4, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "p5":
-						while (!moverPosicao(jogador[i], jogador[i].p5, tb));
+						while (!moverPosicao(jogador[i], jogador[i].p5, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "p6":
-						while (!moverPosicao(jogador[i], jogador[i].p6, tb));
+						while (!moverPosicao(jogador[i], jogador[i].p6, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "p7":
-						while (!moverPosicao(jogador[i], jogador[i].p7, tb));
+						while (!moverPosicao(jogador[i], jogador[i].p7, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "p8":
-						while (!moverPosicao(jogador[i], jogador[i].p8, tb));
+						while (!moverPosicao(jogador[i], jogador[i].p8, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "be":
-						while (!moverPosicao(jogador[i], jogador[i].be, tb));
+						while (!moverPosicao(jogador[i], jogador[i].be, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "bd":
-						while (!moverPosicao(jogador[i], jogador[i].bd, tb));
+						while (!moverPosicao(jogador[i], jogador[i].bd, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "ce":
-						while (!moverPosicao(jogador[i], jogador[i].ce, tb));
+						while (!moverPosicao(jogador[i], jogador[i].ce, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "cd":
-						while (!moverPosicao(jogador[i], jogador[i].cd, tb));
+						while (!moverPosicao(jogador[i], jogador[i].cd, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "r":
-						while (!moverPosicao(jogador[i], jogador[i].rei, tb));
+						while (!moverPosicao(jogador[i], jogador[i].rei, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "te":
-						while (!moverPosicao(jogador[i], jogador[i].te, tb));
+						while (!moverPosicao(jogador[i], jogador[i].te, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "td":
-						while (!moverPosicao(jogador[i], jogador[i].td, tb));
+						while (!moverPosicao(jogador[i], jogador[i].td, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					case "d":
-						while (!moverPosicao(jogador[i], jogador[i].dama, tb));
+						while (!moverPosicao(jogador[i], jogador[i].dama, tb))
+							;
 						printarTabuleiro(tb);
 						break;
 					}

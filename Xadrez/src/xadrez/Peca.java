@@ -15,7 +15,11 @@ public abstract class Peca {
 	protected int linha;
 	protected int coluna;
 	
-	protected Tabuleiro tabuleiro = new Tabuleiro();
+	protected Tabuleiro tabuleiro;
+
+	// public Peca(Tabuleiro tb) {
+	// 	setTabuleiro(tabuleiro);
+	// }
 	
 	public abstract String desenha();
 	public abstract boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
@@ -51,6 +55,12 @@ public abstract class Peca {
 		this.coluna = coluna;
 	}
 	
-	
+	public void setTabuleiro(Tabuleiro tabuleiro) {
+		this.tabuleiro = tabuleiro;
+	}
+
+	public Tabuleiro getTabuleiro() {
+		return tabuleiro;
+	}
 	
 }

@@ -1,12 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package xadrez;
 
 /**
- * Classe responsável por criar os dois jogadores junto com suas peças
+ * Classe responsï¿½vel por criar os dois jogadores junto com suas peï¿½as
  *
  * @author Daniele
  */
@@ -14,46 +14,65 @@ public class Jogador{
     private String nomeJogador;
     private float pontuacaoJogador;
     private String corJogador;
+    private Tabuleiro tabuleiro;
     
-    // instanciando peças
-    Dama dama = new Dama(this.getCorJogador());
+    public Jogador(String cor){
+        setCorJogador(cor);
+        atualizarCorPecas();
+        definePosicaoInicial();   
+    }
     
-    Rei rei = new Rei(this.getCorJogador());
+    public void inicializaJogador( Tabuleiro tabuleiro) {
+        dama.setTabuleiro(tabuleiro);
+    	rei.setTabuleiro(tabuleiro);
+    	ce.setTabuleiro(tabuleiro);
+    	cd.setTabuleiro(tabuleiro);
+    	bd.setTabuleiro(tabuleiro);
+    	be.setTabuleiro(tabuleiro);
+    	te.setTabuleiro(tabuleiro);
+    	td.setTabuleiro(tabuleiro);
+    	p1.setTabuleiro(tabuleiro);
+    	p2.setTabuleiro(tabuleiro);
+    	p3.setTabuleiro(tabuleiro);
+    	p4.setTabuleiro(tabuleiro);
+    	p5.setTabuleiro(tabuleiro);
+    	p6.setTabuleiro(tabuleiro);
+    	p7.setTabuleiro(tabuleiro);
+    	p8.setTabuleiro(tabuleiro);
+    }
+    // instanciando peï¿½as
+    Dama dama = new Dama(this.getCorJogador(), tabuleiro);
     
-    Peao p1 = new Peao(this.getCorJogador(), 1);
-    Peao p2 = new Peao(this.getCorJogador(), 2);
-    Peao p3 = new Peao(this.getCorJogador(), 3);
-    Peao p4 = new Peao(this.getCorJogador(), 4);
-    Peao p5 = new Peao(this.getCorJogador(), 5);
-    Peao p6 = new Peao(this.getCorJogador(), 6);
-    Peao p7 = new Peao(this.getCorJogador(), 7);
-    Peao p8 = new Peao(this.getCorJogador(), 8);
+    Rei rei = new Rei(this.getCorJogador(), tabuleiro);
+    
+    Peao p1 = new Peao(this.getCorJogador(), 1, tabuleiro);
+    Peao p2 = new Peao(this.getCorJogador(), 2, tabuleiro);
+    Peao p3 = new Peao(this.getCorJogador(), 3, tabuleiro);
+    Peao p4 = new Peao(this.getCorJogador(), 4, tabuleiro);
+    Peao p5 = new Peao(this.getCorJogador(), 5, tabuleiro);
+    Peao p6 = new Peao(this.getCorJogador(), 6, tabuleiro);
+    Peao p7 = new Peao(this.getCorJogador(), 7, tabuleiro);
+    Peao p8 = new Peao(this.getCorJogador(), 8, tabuleiro);
    
     
-    Torre te = new Torre(this.getCorJogador(), "esquerda");
-    Torre td = new Torre(this.getCorJogador(), "direita");
+    Torre te = new Torre(this.getCorJogador(), "esquerda", tabuleiro);
+    Torre td = new Torre(this.getCorJogador(), "direita", tabuleiro);
     
 
-    Bispo be = new Bispo(this.getCorJogador(), "esquerda");
-    Bispo bd = new Bispo(this.getCorJogador(), "direita");
+    Bispo be = new Bispo(this.getCorJogador(), "esquerda", tabuleiro);
+    Bispo bd = new Bispo(this.getCorJogador(), "direita", tabuleiro);
     
 
-    Cavalo ce = new Cavalo(this.getCorJogador(), "esquerda");
-    Cavalo cd = new Cavalo(this.getCorJogador(), "direita");
-   
+    Cavalo ce = new Cavalo(this.getCorJogador(), "esquerda", tabuleiro);
+    Cavalo cd = new Cavalo(this.getCorJogador(), "direita", tabuleiro);
     /**
-     * Construtor do jogador, responsável por setar a cor e definir parametros de suas peças
+     * Construtor do jogador, responsï¿½vel por setar a cor e definir parametros de suas peï¿½as
      * 
      * @param cor Recebe a cor do jogador (branca/preta)
      */
-    public Jogador(String cor){
-    	setCorJogador(cor);
-        atualizarCorPecas();
-        definePosicaoInicial();
-    }
     
     /**
-     * Atribui para cada peça a sua devida posição inicial
+     * Atribui para cada peï¿½a a sua devida posiï¿½ï¿½o inicial
      */
     public void definePosicaoInicial() {
     	dama.definePosicaoInicial();
@@ -75,7 +94,7 @@ public class Jogador{
     }
     
     /**
-     * Para cada peça do jogador, faz o set da sua cor
+     * Para cada peï¿½a do jogador, faz o set da sua cor
      */
     public void atualizarCorPecas(){
        dama.setCor(this.getCorJogador());
@@ -120,5 +139,15 @@ public class Jogador{
     public void setCorJogador(String corJogador) {
         this.corJogador = corJogador;
 	}
+
+    public Tabuleiro getTabuleiro() {
+        return tabuleiro;
+    }
+
+    public void setTabuleiro(Tabuleiro tabuleiro) {
+        this.tabuleiro = tabuleiro;
+    }
+
+    
 
 }

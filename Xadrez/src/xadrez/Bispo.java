@@ -20,7 +20,8 @@ public class Bispo extends Peca {
 	 * @param cor  Cor da pe�a (branca/preta)
 	 * @param lado Informa se o bispo � o esquerdo ou o direito
 	 */
-	public Bispo(String cor, String lado) {
+	public Bispo(String cor, String lado, Tabuleiro tabuleiro) {
+		setTabuleiro(tabuleiro);
 		setCor(cor);
 		setLado(lado);
 		setCapturada(false);
@@ -64,10 +65,12 @@ public class Bispo extends Peca {
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
 			// diagonais
-			if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino))
+			if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino) && tabuleiro.pecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
 				return true;
 
 		}
+
+
 
 		return false;
 	}

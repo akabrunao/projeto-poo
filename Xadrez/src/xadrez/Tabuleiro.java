@@ -28,10 +28,6 @@ public class Tabuleiro {
 		posicionaPecasParaInicioDoJogo(j1, j2);
 	}
 	
-	/**
-	 * Construtor vazio
-	 */
-	public Tabuleiro() {};
 
 	/**
 	 * M�todo que ap�s uma jogada, atualiza a casa que a pe�a estava anteriormente,
@@ -41,8 +37,10 @@ public class Tabuleiro {
 	 * @param coluna A coluna da posi��o que a pe�a estava
 	 */
 	public void atualizaTabuleiro(int linha, int coluna) {
+		System.out.println("Tabuleiro vai definir a posição " + linha + " e " + coluna + " como false");
 		tabuleiro[linha][coluna].setOcupada(false);
 		tabuleiro[linha][coluna].setDesenho(defineCorDaCasa(linha, coluna));
+		System.out.println(tabuleiro[linha][coluna].getOcupada());
 	}
 
 	/**
@@ -170,6 +168,47 @@ public class Tabuleiro {
 
 	public void setPosicao(int linha, int coluna, Peca p) {
 		tabuleiro[linha][coluna].setPeca(p);
+	}
+
+	public boolean pecaNoCaminhoDiagonal(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+		while (linhaOrigem != linhaDestino && colunaOrigem != colunaDestino) {
+			if (linhaDestino < linhaOrigem) {
+				linhaOrigem--;
+			} else {
+				linhaOrigem++;
+			}
+
+			if (colunaDestino < colunaOrigem) {
+				colunaOrigem--;
+			} else {
+				colunaOrigem++;
+			}
+
+			if (tabuleiro[linhaOrigem][linhaDestino].getOcupada()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean pecaNoCaminhoReta(int origem, int destino) {
+		System.out.println(tabuleiro[1][1].getOcupada());
+		while (origem != destino) {
+			if (destino < origem) {
+				origem--;
+			} else {
+				origem++;
+			}
+	
+			if (tabuleiro[origem][destino].getOcupada()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean estaOcupada(int linha, int coluna) {
+		return tabuleiro[linha][coluna].getOcupada();
 	}
 
 }

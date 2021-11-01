@@ -19,7 +19,8 @@ public class Rei extends Peca {
 	 * 
 	 * @param cor  Cor da pe�a (branca/preta)
 	 */
-	public Rei(String cor) {
+	public Rei(String co, Tabuleiro tabuleiro) {
+		setTabuleiro(tabuleiro);
 		setCor(cor);
 		setCapturada(false);
 

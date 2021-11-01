@@ -6,7 +6,7 @@
 package xadrez;
 
 /**
- * Classe responsável pela peça "Torre"
+ * Classe responsï¿½vel pela peï¿½a "Torre"
  *
  * @author Daniele
  */
@@ -14,13 +14,14 @@ public class Torre extends Peca {
     private String lado;
 
 	/**
-	 * Construtor da torre, responsável por inicializar os atributos e definir a
-	 * posição inicial da peça no inicio do jogo.
+	 * Construtor da torre, responsï¿½vel por inicializar os atributos e definir a
+	 * posiï¿½ï¿½o inicial da peï¿½a no inicio do jogo.
 	 * 
-	 * @param cor  Cor da peça (branca/preta)
-	 * @param lado Informa se a torre é a esquerda ou a direita
+	 * @param cor  Cor da peï¿½a (branca/preta)
+	 * @param lado Informa se a torre ï¿½ a esquerda ou a direita
 	 */
-    public Torre(String cor, String lado) {
+    public Torre(String cor, String lado, Tabuleiro tabuleiro) {
+		setTabuleiro(tabuleiro);
         setCor(cor);
         setLado(lado);
         setCapturada(false);
@@ -28,7 +29,7 @@ public class Torre extends Peca {
     }
 
 	/**
-	 * De acordo com os atributos da peça, retorna o desenho correspondente para que
+	 * De acordo com os atributos da peï¿½a, retorna o desenho correspondente para que
 	 * possa ser impresso no tabuleiro
 	 * 
 	 * @return Uma String com o desenho correspondente
@@ -50,28 +51,28 @@ public class Torre extends Peca {
     }
 
 	/**
-	 * Checa se a posição informada pelo jogador pertence ao tabuleiro, e então
-	 * verifica se o movimento é válido de acordo com as regras da peça
+	 * Checa se a posiï¿½ï¿½o informada pelo jogador pertence ao tabuleiro, e entï¿½o
+	 * verifica se o movimento ï¿½ vï¿½lido de acordo com as regras da peï¿½a
 	 * 
-	 * @param linhaOrigem   A linha da posição que a peça estava
-	 * @param colunaOrigem  A coluna da posição que a peça estava
-	 * @param linhaDestino  A linha da posição que a peça irá
-	 * @param colunaDestino A coluna da posição que a peça irá
-	 * @return true caso o movimento seja válido, false se o movimento for inválido
+	 * @param linhaOrigem   A linha da posiï¿½ï¿½o que a peï¿½a estava
+	 * @param colunaOrigem  A coluna da posiï¿½ï¿½o que a peï¿½a estava
+	 * @param linhaDestino  A linha da posiï¿½ï¿½o que a peï¿½a irï¿½
+	 * @param colunaDestino A coluna da posiï¿½ï¿½o que a peï¿½a irï¿½
+	 * @return true caso o movimento seja vï¿½lido, false se o movimento for invï¿½lido
 	 */
     public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
     	if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
     		//Linhas retas
-    		if (linhaOrigem == linhaDestino)
+    		if (linhaOrigem == linhaDestino && tabuleiro.pecaNoCaminhoReta(colunaOrigem, colunaDestino))
     			return true;
-    		if (colunaOrigem == colunaDestino)
+    		if (colunaOrigem == colunaDestino && tabuleiro.pecaNoCaminhoReta(linhaOrigem, linhaDestino))
     			return true;    		
     	}
         return false;
     }
     
 	/**
-	 * De acordo com os atributos da peça, faz o set da posição que ela deverá estar
+	 * De acordo com os atributos da peï¿½a, faz o set da posiï¿½ï¿½o que ela deverï¿½ estar
 	 * no inicio do jogo
 	 */
 	public void definePosicaoInicial() {

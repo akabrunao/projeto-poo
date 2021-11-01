@@ -18,7 +18,8 @@ public class Dama extends Peca {
 	 * 
 	 * @param cor Cor da pe�a (branca/preta)
 	 */
-	public Dama(String cor) {
+	public Dama(String cor, Tabuleiro tabuleiro) {
+		setTabuleiro(tabuleiro);
 		setCor(cor);
 		setCapturada(false);
 
@@ -51,7 +52,7 @@ public class Dama extends Peca {
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		// fora do tabuleiro
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
+		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && (tabuleiro.pecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && (tabuleiro.pecaNoCaminhoReta(linhaOrigem, linhaDestino) || tabuleiro.pecaNoCaminhoReta(colunaOrigem, colunaDestino)) )) {
 			// posicoes validas para a dama
 			if (linhaOrigem == linhaDestino)
 				return true;

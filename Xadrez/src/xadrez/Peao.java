@@ -21,7 +21,8 @@ public class Peao extends Peca {
 	 * @param cor recebe a cor da pe�a
 	 * @param num recebe o id do pe�o
 	 */
-	public Peao(String cor, int num) {
+	public Peao(String cor, int num, Tabuleiro tabuleiro) {
+		setTabuleiro(tabuleiro);
 		setCor(cor);
 		setNum(num);
 		setCapturada(false);
