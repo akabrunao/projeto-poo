@@ -63,7 +63,7 @@ public class Cavalo extends Peca {
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		// fora do tabuleiro
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
+		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && tabuleiro.pecaNoCaminhoPosicaoDestino(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) {
 			// posicoes validas para o cavalo
 			if ((linhaOrigem - linhaDestino == -2 || linhaOrigem - linhaDestino == 2)
 					&& (colunaOrigem - colunaDestino == 1 || colunaOrigem - colunaDestino == -1))

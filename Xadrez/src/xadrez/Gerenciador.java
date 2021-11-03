@@ -38,6 +38,8 @@ public class Gerenciador {
 		jogador[1].setNomeJogador(nome);
 
 		jogo.iniciarJogo(jogador);
+
+		scanner.close();
         
 		
 

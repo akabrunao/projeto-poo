@@ -27,7 +27,6 @@ public class Tabuleiro {
 		criaTabuleiro();
 		posicionaPecasParaInicioDoJogo(j1, j2);
 	}
-	
 
 	/**
 	 * M�todo que ap�s uma jogada, atualiza a casa que a pe�a estava anteriormente,
@@ -37,10 +36,8 @@ public class Tabuleiro {
 	 * @param coluna A coluna da posi��o que a pe�a estava
 	 */
 	public void atualizaTabuleiro(int linha, int coluna) {
-		System.out.println("Tabuleiro vai definir a posição " + linha + " e " + coluna + " como false");
 		tabuleiro[linha][coluna].setOcupada(false);
 		tabuleiro[linha][coluna].setDesenho(defineCorDaCasa(linha, coluna));
-		System.out.println(tabuleiro[linha][coluna].getOcupada());
 	}
 
 	/**
@@ -59,7 +56,8 @@ public class Tabuleiro {
 	}
 
 	/**
-	 * Organiza todas as pe�as para o inicio do jogo, colocando cada uma em sua respectiva posi��o
+	 * Organiza todas as pe�as para o inicio do jogo, colocando cada uma em sua
+	 * respectiva posi��o
 	 * 
 	 * @param j1 Recebe o jogador 1
 	 * @param j2 Recebe o jogador 2
@@ -122,9 +120,10 @@ public class Tabuleiro {
 			}
 		}
 	}
-	
+
 	/**
-	 * Para cada casa do tabuleiro, com base em suas coordenadas, define se ela deve ser preta ou branca
+	 * Para cada casa do tabuleiro, com base em suas coordenadas, define se ela deve
+	 * ser preta ou branca
 	 * 
 	 * @param i Recebe a linha
 	 * @param j Recebe a coluna
@@ -156,9 +155,9 @@ public class Tabuleiro {
 				}
 			}
 		}
-		System.out.printf("\n    a  b  c  d  e  f  g  h\n");
+		System.out.printf("\n     a  b  c  d  e  f  g  h\n");
 	}
-	
+
 	public boolean checaLimitesDoTabuleiro(int linhaDestino, int colunaDestino) {
 		if (linhaDestino >= 0 && linhaDestino <= 7 && colunaDestino >= 0 && colunaDestino <= 7) {
 			return true;
@@ -184,31 +183,54 @@ public class Tabuleiro {
 				colunaOrigem++;
 			}
 
-			if (tabuleiro[linhaOrigem][linhaDestino].getOcupada()) {
+			if (tabuleiro[linhaOrigem][colunaOrigem].getOcupada()) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	public boolean pecaNoCaminhoReta(int origem, int destino) {
-		System.out.println(tabuleiro[1][1].getOcupada());
-		while (origem != destino) {
-			if (destino < origem) {
-				origem--;
-			} else {
-				origem++;
+	public boolean pecaNoCaminhoReta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+		if (linhaOrigem == linhaDestino) {
+			while (colunaOrigem != colunaDestino) {
+
+				if (colunaOrigem < colunaDestino) {
+					colunaOrigem++;
+				} else {
+					colunaOrigem--;
+				}
+
+				if (tabuleiro[linhaOrigem][colunaOrigem].getOcupada()) {
+					return false;
+				}
 			}
-	
-			if (tabuleiro[origem][destino].getOcupada()) {
-				return false;
+
+		}
+
+		if (colunaOrigem == colunaDestino) {
+			while (linhaOrigem != linhaDestino) {
+
+				if (linhaOrigem < linhaDestino) {
+					linhaOrigem++;
+				} else {
+					linhaOrigem--;
+				}
+
+				if (tabuleiro[linhaOrigem][colunaOrigem].getOcupada()) {
+					return false;
+				}
 			}
+		}
+
+		return true;
+	}
+
+	public boolean pecaNoCaminhoPosicaoDestino(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+		if (tabuleiro[linhaDestino][colunaDestino].getOcupada()) {
+			return false;
 		}
 		return true;
 	}
 
-	public boolean estaOcupada(int linha, int coluna) {
-		return tabuleiro[linha][coluna].getOcupada();
-	}
 
 }

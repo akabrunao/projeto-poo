@@ -61,11 +61,12 @@ public class Torre extends Peca {
 	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
     public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+		// System.out.printf("linha: %B\ncoluna: %B\n", tabuleiro.pecaNoCaminhoReta(linhaOrigem, linhaDestino, colunaOrigem, colunaDestino));
     	if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
     		//Linhas retas
-    		if (linhaOrigem == linhaDestino && tabuleiro.pecaNoCaminhoReta(colunaOrigem, colunaDestino))
+    		if (linhaOrigem == linhaDestino && tabuleiro.pecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
     			return true;
-    		if (colunaOrigem == colunaDestino && tabuleiro.pecaNoCaminhoReta(linhaOrigem, linhaDestino))
+    		if (colunaOrigem == colunaDestino && tabuleiro.pecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
     			return true;    		
     	}
         return false;

@@ -95,104 +95,74 @@ public class Jogo {
 				int i = 0;
 				while (true) {
 					System.out.println("Vez do jogador: " + jogador[i].getNomeJogador());
-					System.out.println("Escolha uma pe�a dispon�vel: ");
 					printarTabuleiro(tb);
+					System.out.println("Escolha uma pe�a dispon�vel: ");
 					String nome = scanner.next();
 					nome = nome.toLowerCase();
 					switch (nome) {
 					case "p1":
-						while (!moverPosicao(jogador[i], jogador[i].p1, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].p1, tb));
 						break;
 					case "p2":
-						while (!moverPosicao(jogador[i], jogador[i].p2, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].p2, tb));
 						break;
 					case "p3":
-						while (!moverPosicao(jogador[i], jogador[i].p3, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].p3, tb));
 						break;
 					case "p4":
-						while (!moverPosicao(jogador[i], jogador[i].p4, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].p4, tb));
 						break;
 					case "p5":
-						while (!moverPosicao(jogador[i], jogador[i].p5, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].p5, tb));
 						break;
 					case "p6":
-						while (!moverPosicao(jogador[i], jogador[i].p6, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].p6, tb));
 						break;
 					case "p7":
-						while (!moverPosicao(jogador[i], jogador[i].p7, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].p7, tb));
 						break;
 					case "p8":
-						while (!moverPosicao(jogador[i], jogador[i].p8, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].p8, tb));
 						break;
 					case "be":
-						while (!moverPosicao(jogador[i], jogador[i].be, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].be, tb));
 						break;
 					case "bd":
-						while (!moverPosicao(jogador[i], jogador[i].bd, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].bd, tb));
 						break;
 					case "ce":
-						while (!moverPosicao(jogador[i], jogador[i].ce, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].ce, tb));
 						break;
 					case "cd":
-						while (!moverPosicao(jogador[i], jogador[i].cd, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].cd, tb));
 						break;
 					case "r":
-						while (!moverPosicao(jogador[i], jogador[i].rei, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].rei, tb));
 						break;
 					case "te":
-						while (!moverPosicao(jogador[i], jogador[i].te, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].te, tb));
 						break;
 					case "td":
-						while (!moverPosicao(jogador[i], jogador[i].td, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].td, tb));
 						break;
 					case "d":
-						while (!moverPosicao(jogador[i], jogador[i].dama, tb))
-							;
-						printarTabuleiro(tb);
+						while (!moverPosicao(jogador[i], jogador[i].dama, tb));
 						break;
+					default: 
+						System.out.println("A peça digitada não é válida");
 					}
 
-					System.out.println("Aperte 1 se quiser continuar o jogo e 2 para encerrar o jogo.");
-					op = scanner.nextInt();
-					if (op == 2) {
-						break;
-					}
+					// System.out.println("Aperte 1 se quiser continuar o jogo e 2 para encerrar o jogo.");
+					// op = scanner.nextInt();
+					// if (op == 2) {
+					// 	break;
+					// }
 
-					if (i == 0) {
-						i = 1;
-					} else {
-						i = 0;
-					}
+					// if (i == 0) {
+					// 	i = 1;
+					// } else {
+					// 	i = 0;
+					// }
 				}
 
 			case 2:

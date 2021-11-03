@@ -52,7 +52,7 @@ public class Dama extends Peca {
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		// fora do tabuleiro
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && (tabuleiro.pecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && (tabuleiro.pecaNoCaminhoReta(linhaOrigem, linhaDestino) || tabuleiro.pecaNoCaminhoReta(colunaOrigem, colunaDestino)) )) {
+		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && (tabuleiro.pecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && (tabuleiro.pecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)))) {
 			// posicoes validas para a dama
 			if (linhaOrigem == linhaDestino)
 				return true;
