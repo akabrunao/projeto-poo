@@ -21,7 +21,7 @@ public class Dama extends Peca {
 	public Dama(String cor, Tabuleiro tabuleiro) {
 		setTabuleiro(tabuleiro);
 		setCor(cor);
-		setCapturada(false);
+		capturada = false;
 
 		definePosicaoInicial();
 	}
@@ -34,9 +34,9 @@ public class Dama extends Peca {
 	 */
 	public String desenha() {
 		if (getCor() == "branca") {
-			return "d  ";
+			return " d ";
 		} else { // cor == "preta"
-			return "D  ";
+			return " D ";
 		}
 	}
 
@@ -51,20 +51,20 @@ public class Dama extends Peca {
 	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+		boolean flag = false;
 		// fora do tabuleiro
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && (tabuleiro.pecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && (tabuleiro.pecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)))) {
+		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && (tabuleiro.naoTemPecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && (tabuleiro.naoTemPecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)))) {
 			// posicoes validas para a dama
 			if (linhaOrigem == linhaDestino)
-				return true;
+				flag = true;
 			if (colunaOrigem == colunaDestino)
-				return true;
-			if ((linhaOrigem - linhaDestino) == (colunaOrigem - colunaDestino))
-				return true;
-			if ((linhaDestino - linhaOrigem) == (colunaDestino - colunaOrigem))
-				return true;
+				flag = true;
+			if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino))
+				flag = true;
+
 		}
 
-		return false;
+		return flag;
 	}
 
 	/**

@@ -21,10 +21,10 @@ public class Torre extends Peca {
 	 * @param lado Informa se a torre � a esquerda ou a direita
 	 */
     public Torre(String cor, String lado, Tabuleiro tabuleiro) {
-		setTabuleiro(tabuleiro);
+	setTabuleiro(tabuleiro);
         setCor(cor);
         setLado(lado);
-        setCapturada(false);
+		capturada = false;
         definePosicaoInicial();
     }
 
@@ -64,9 +64,9 @@ public class Torre extends Peca {
 		// System.out.printf("linha: %B\ncoluna: %B\n", tabuleiro.pecaNoCaminhoReta(linhaOrigem, linhaDestino, colunaOrigem, colunaDestino));
     	if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
     		//Linhas retas
-    		if (linhaOrigem == linhaDestino && tabuleiro.pecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
+    		if (linhaOrigem == linhaDestino && tabuleiro.naoTemPecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
     			return true;
-    		if (colunaOrigem == colunaDestino && tabuleiro.pecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
+    		if (colunaOrigem == colunaDestino && tabuleiro.naoTemPecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
     			return true;    		
     	}
         return false;

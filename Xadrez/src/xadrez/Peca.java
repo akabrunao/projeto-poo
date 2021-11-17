@@ -25,7 +25,9 @@ public abstract class Peca {
 	public abstract boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
 	public abstract void definePosicaoInicial();
 	
-	
+	public void captura() {
+		capturada = true;
+	}
 	public boolean isCapturada() {
 		return capturada;
 	}

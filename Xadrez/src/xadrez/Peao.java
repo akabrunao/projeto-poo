@@ -25,7 +25,7 @@ public class Peao extends Peca {
 		setTabuleiro(tabuleiro);
 		setCor(cor);
 		setNum(num);
-		setCapturada(false);
+		capturada = false;
 		definePosicaoInicial();
 		setEstadoInicial(true);
 	}
@@ -45,12 +45,11 @@ public class Peao extends Peca {
 	}
 
 	public boolean primeiraJogada(){
-            if(this.estadoInicial){
-                this.estadoInicial = false;
-                return true;
-            }
-            return false;
-        }
+		if(this.estadoInicial){
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Checa se a posi��o informada pelo jogador pertence ao tabuleiro, e ent�o
@@ -63,14 +62,18 @@ public class Peao extends Peca {
 	 * * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && tabuleiro.pecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) {
+		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && tabuleiro.naoTemPecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) {
 			if (primeiraJogada()) {
 				if (this.getCor() == "branca") {
-					if (((linhaDestino - linhaOrigem) == 1 || (linhaDestino - linhaOrigem) == 2) && colunaOrigem == colunaDestino)
+					if (((linhaDestino - linhaOrigem) == 1 || (linhaDestino - linhaOrigem) == 2) && colunaOrigem == colunaDestino) {
+						estadoInicial = false;
 						return true;
+					}
 				} else {
-					if (((linhaOrigem - linhaDestino) == 1 || (linhaOrigem - linhaDestino) == 2) && colunaOrigem == colunaDestino)
+					if (((linhaOrigem - linhaDestino) == 1 || (linhaOrigem - linhaDestino) == 2) && colunaOrigem == colunaDestino) {
+						estadoInicial = false;
 						return true;
+					}
 				}
 				return false;
 			}

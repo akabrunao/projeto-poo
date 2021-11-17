@@ -22,7 +22,7 @@ public class Rei extends Peca {
 	public Rei(String co, Tabuleiro tabuleiro) {
 		setTabuleiro(tabuleiro);
 		setCor(cor);
-		setCapturada(false);
+		capturada = false;
 
 		definePosicaoInicial();
 	}
@@ -35,9 +35,9 @@ public class Rei extends Peca {
 	 */
 	public String desenha() {
 		if (getCor() == "branca") {
-			return "r  ";
+			return " r ";
 		} else { // cor == "preta"
-			return "R  ";
+			return " R ";
 		}
 	}
 
@@ -52,7 +52,7 @@ public class Rei extends Peca {
 	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && tabuleiro.pecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && tabuleiro.pecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) {
+		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && tabuleiro.naoTemPecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && tabuleiro.naoTemPecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) {
 			if ((Math.abs(linhaOrigem - linhaDestino) <= 1 && (Math.abs(colunaOrigem - colunaDestino) <= 1))
 					&& (Math.abs(linhaOrigem - linhaDestino) == 1 || 1 == Math.abs(colunaOrigem - colunaDestino))) {
 				return true;
@@ -70,7 +70,7 @@ public class Rei extends Peca {
 		if (cor == "branca") {
 			setPosicao(0, 4);
 		} else {
-			setPosicao(7, 4);
+			setPosicao(7, 4); 
 		}
 	}
 

@@ -24,7 +24,7 @@ public class Bispo extends Peca {
 		setTabuleiro(tabuleiro);
 		setCor(cor);
 		setLado(lado);
-		setCapturada(false);
+		capturada = false;
 
 		definePosicaoInicial();
 	}
@@ -65,7 +65,7 @@ public class Bispo extends Peca {
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
 			// diagonais
-			if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino) && tabuleiro.pecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
+			if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino) && tabuleiro.naoTemPecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
 				return true;
 
 		}
