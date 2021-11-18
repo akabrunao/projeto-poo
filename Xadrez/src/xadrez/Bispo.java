@@ -6,27 +6,25 @@
 package xadrez;
 
 /**
- * Classe respons�vel pela pe�a "Bispo"
+ * Classe responsavel pela peca "Bispo"
  *
  * @author Daniele
  */
 public class Bispo extends Peca {
-	private String lado;
-
 	/**
-	 * Construtor do bispo, respons�vel por inicializar os atributos e definir a
-	 * posi��o inicial da pe�a no inicio do jogo.
+	 * Construtor do bispo, responsavel por inicializar os atributos e definir a
+	 * posicao inicial da peca no inicio do jogo.
 	 * 
-	 * @param cor  Cor da pe�a (branca/preta)
-	 * @param lado Informa se o bispo � o esquerdo ou o direito
+	 * @param cor Cor da peca (branca/preta)
 	 */
-	public Bispo(String cor, String lado, Tabuleiro tabuleiro) {
-		setTabuleiro(tabuleiro);
-		setCor(cor);
-		setLado(lado);
-		capturada = false;
-
-		definePosicaoInicial();
+	public Bispo(String cor) {
+		if (cor.toLowerCase().equals("branca") || cor.toLowerCase().equals("preta")) {
+			setCor(cor);
+			this.capturada = false;
+			desenha();
+		} else {
+			System.out.println("Cor escolhida é inválida!");
+		}
 	}
 
 	/**
@@ -35,71 +33,31 @@ public class Bispo extends Peca {
 	 * 
 	 * @return Uma String com o desenho correspondente
 	 */
-	public String desenha() {
+	public void desenha() {
 		if (cor == "branca") {
-			if (lado == "esquerda") {
-				return "be ";
-			} else {
-				return "bd ";
-			}
+			this.desenho = "b";
+		} else if (cor == "preta") {
+			this.desenho = "B";
 		} else {
-			if (lado == "esquerda") {
-				return "BE ";
-			} else {
-				return "BD ";
-			}
+			System.out.println("Cor inválida!");
 		}
-
 	}
 
 	/**
-	 * Checa se a posi��o informada pelo jogador pertence ao tabuleiro, e ent�o
-	 * verifica se o movimento � v�lido de acordo com as regras da pe�a
+	 * Checa se a posicao informada pelo jogador pertence ao tabuleiro, e entao
+	 * verifica se o movimento é valido de acordo com as regras da peca
 	 * 
-	 * @param linhaOrigem   A linha da posi��o que a pe�a estava
-	 * @param colunaOrigem  A coluna da posi��o que a pe�a estava
-	 * @param linhaDestino  A linha da posi��o que a pe�a ir�
-	 * @param colunaDestino A coluna da posi��o que a pe�a ir�
-	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
+	 * @param linhaOrigem   A linha da posicao que a peca estava
+	 * @param colunaOrigem  A coluna da posicao que a peca estava
+	 * @param linhaDestino  A linha da posicao que a peca ira
+	 * @param colunaDestino A coluna da posicao que a peca ira
+	 * @return true caso o movimento seja valido, false se o movimento for invalido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino)) {
-			// diagonais
-			if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino) && tabuleiro.naoTemPecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino))
-				return true;
 
-		}
-
-
-
+		if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino))
+			return true;
 		return false;
 	}
 
-	/**
-	 * De acordo com os atributos da pe�a, faz o set da posi��o que ela dever� estar
-	 * no inicio do jogo
-	 */
-	public void definePosicaoInicial() {
-		if (cor == "branca") {
-			if (lado == "esquerda") {
-				setPosicao(0, 2);
-			} else {
-				setPosicao(0, 5);
-			}
-		} else {
-			if (lado == "esquerda") {
-				setPosicao(7, 2);
-			} else {
-				setPosicao(7, 5);
-			}
-		}
-	}
-
-	// GETTERS E SETTERS
-	public String getLado() {
-		return lado;
-	}
-	public void setLado(String lado) {
-		this.lado = lado;
-	}
 }

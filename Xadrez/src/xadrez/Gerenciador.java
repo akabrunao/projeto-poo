@@ -26,18 +26,17 @@ public class Gerenciador {
 		System.out.println("Por gentileza, insira o nome do jogador 1 (pe�as brancas):");
 
 		// Cria os jogadores
-		Jogador[] jogador = new Jogador[2];
         
 
-		jogador[0] = new Jogador("branca");
+		Jogador j1 = new Jogador("branca");
 		String nome = scanner.nextLine();
-		jogador[0].setNomeJogador(nome);
+		j1.setNome(nome);
 		System.out.println("Por gentileza, insira o nome do jogador 2 (pe�as pretas):");
-		jogador[1] = new Jogador("preta");
+		Jogador j2 = new Jogador("preta");
 		nome = scanner.nextLine();
-		jogador[1].setNomeJogador(nome);
+		j2.setNome(nome);
 
-		jogo.iniciarJogo(jogador);
+		jogo.iniciarJogo(j1, j2);
 
 		scanner.close();
         

@@ -11,57 +11,83 @@ package xadrez;
  * @author Bruno
  */
 public class Posicao {
-    private String cor;
-    private int linha;
-    private int coluna;
-    private Peca peca;
-    private String desenho;
-    private boolean ocupada;
+	private String cor;
+	private int linha;
+	private int coluna;
+	private Peca peca;
+	private String desenho;
+	private boolean ocupada;
 
-	
-    
-    
-    
+	public Posicao(int linha, int coluna, String cor) {
+		this.setOcupada(false);
+		this.setLinha(linha);
+		this.setColuna(coluna);
+		this.setCor(cor);
+	}
+
 	public String getCor() {
 		return cor;
 	}
+
 	public void setCor(String cor) {
 		this.cor = cor;
 	}
+
 	public int getLinha() {
 		return linha;
 	}
+
 	public void setLinha(int linha) {
-		this.linha = linha;
+		if (linha >= 0 && linha <= 7){
+			this.linha = linha;
+		} else {
+			System.out.println("Linha inválida!");
+		}
 	}
+
 	public int getColuna() {
 		return coluna;
 	}
+
 	public void setColuna(int coluna) {
-		this.coluna = coluna;
+		if (coluna >= 0 && coluna <= 7){
+			this.coluna = coluna;
+		} else {
+			System.out.println("Coluna inválida!");
+		}
 	}
+
 	public Peca getPeca() {
-		return peca;
+		if (this.getOcupada()) {
+			return this.peca;
+		} else {
+			return null;
+		}
 	}
+
 	public void setPeca(Peca peca) {
 		this.peca = peca;
-		setDesenho(peca.desenha());
+		if (peca == null) {
+			this.setOcupada(false);
+		} else {
+			this.setOcupada(true);
+		}
 	}
+
 	public String getDesenho() {
 		return desenho;
 	}
+
 	public void setDesenho(String desenho) {
 		this.desenho = desenho;
 	}
+
 	public boolean getOcupada() {
 		return ocupada;
 	}
+
 	public void setOcupada(boolean ocupada) {
 		this.ocupada = ocupada;
 	}
-	
-    
-    
-    
-    
+
 }

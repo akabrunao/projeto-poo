@@ -21,11 +21,65 @@ public class Tabuleiro {
 	 * @param j1 Recebe o jogador 1
 	 * @param j2 Recebe o jogador 2
 	 */
-	public Tabuleiro(Jogador j1, Jogador j2) {
+	public Tabuleiro(Peca[] p1, Peca[] p2) {
 		tabuleiro = new Posicao[8][8];
+		String cor;
 
-		criaTabuleiro();
-		posicionaPecasParaInicioDoJogo(j1, j2);
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if ((i % 2) == (j % 2)) {
+					cor = "preta";
+				} else {
+					cor = "branca";
+				}
+
+				this.tabuleiro[i][j] = new Posicao(i, j, cor);
+			}
+		}
+
+		colocaPecaNoTabuleiro(p1);
+		colocaPecaNoTabuleiro(p2);
+
+	}
+
+	/**
+	 * Coloca o vetor de peças nas posições adequadas do tabuleiro, considerando sua
+	 * cor
+	 * 
+	 * @param p vetor de peças a ser inserido
+	 */
+	private void colocaPecaNoTabuleiro(Peca[] p) {
+		int linhaPeao, demaisPecas, i = 0, peao = 0, cavalo = 1, torre = 0, bispo = 2, rainha = 3, rei = 4;
+
+		if (p[0].getCor() == "preta") {
+			linhaPeao = 0; // Se for preto, o peão começa na linha 1
+			demaisPecas = 1; // As demais peças na linha 0
+		} else {
+			linhaPeao = 7; // Se for branco, o peão começa na linha 6
+			demaisPecas = 6; // E as demais peças na linha 7
+		}
+
+		while (i < 16) {
+			if (p[i] instanceof Peao) {
+				tabuleiro[linhaPeao][peao].setPeca(p[i]);
+				peao++;
+			} else if (p[i] instanceof Cavalo) {
+				tabuleiro[demaisPecas][cavalo].setPeca(p[i]);
+				cavalo = 6;
+			} else if (p[i] instanceof Torre) {
+				tabuleiro[demaisPecas][torre].setPeca(p[i]);
+				torre = 7;
+			} else if (p[i] instanceof Bispo) {
+				tabuleiro[demaisPecas][bispo].setPeca(p[i]);
+				bispo = 5;
+			} else if (p[i] instanceof Dama) {
+				tabuleiro[demaisPecas][rainha].setPeca(p[i]);
+			} else if (p[i] instanceof Rei) {
+				tabuleiro[demaisPecas][rei].setPeca(p[i]);
+			}
+			i++;
+		}
+
 	}
 
 	/**
@@ -35,108 +89,9 @@ public class Tabuleiro {
 	 * @param linha  A linha da posi��o que a pe�a estava
 	 * @param coluna A coluna da posi��o que a pe�a estava
 	 */
-	public void atualizaTabuleiro(int linha, int coluna) {
-		tabuleiro[linha][coluna].setOcupada(false);
-		tabuleiro[linha][coluna].setDesenho(defineCorDaCasa(linha, coluna));
-	}
-
-	/**
-	 * Faz com que a posi��o do tabuleiro receba o desenho da pe�a que est� sobre
-	 * ela
-	 * 
-	 * @param p Recebe a pe�a que ser� colocada no tabuleiro
-	 */
-	public void colocaPecaNoTabuleiro(Peca p) {
-		Posicao pos = tabuleiro[p.getLinha()][p.getColuna()];
-
-		if (p.isCapturada() == false) {
-			pos.setOcupada(true);
-			pos.setPeca(p);
-		}
-	}
-
-	/**
-	 * Organiza todas as pe�as para o inicio do jogo, colocando cada uma em sua
-	 * respectiva posi��o
-	 * 
-	 * @param j1 Recebe o jogador 1
-	 * @param j2 Recebe o jogador 2
-	 */
-	private void posicionaPecasParaInicioDoJogo(Jogador j1, Jogador j2) {
-		// dama
-		colocaPecaNoTabuleiro(j1.dama);
-		colocaPecaNoTabuleiro(j2.dama);
-		// rei
-		colocaPecaNoTabuleiro(j1.rei);
-		colocaPecaNoTabuleiro(j2.rei);
-		// cavalo
-		colocaPecaNoTabuleiro(j1.cd);
-		colocaPecaNoTabuleiro(j1.ce);
-		colocaPecaNoTabuleiro(j2.cd);
-		colocaPecaNoTabuleiro(j2.ce);
-
-		colocaPecaNoTabuleiro(j1.td);
-		colocaPecaNoTabuleiro(j1.te);
-		colocaPecaNoTabuleiro(j2.td);
-		colocaPecaNoTabuleiro(j2.te);
-
-		colocaPecaNoTabuleiro(j1.bd);
-		colocaPecaNoTabuleiro(j1.be);
-		colocaPecaNoTabuleiro(j2.bd);
-		colocaPecaNoTabuleiro(j2.be);
-
-		colocaPecaNoTabuleiro(j1.p1);
-		colocaPecaNoTabuleiro(j1.p2);
-		colocaPecaNoTabuleiro(j1.p3);
-		colocaPecaNoTabuleiro(j1.p4);
-		colocaPecaNoTabuleiro(j1.p5);
-		colocaPecaNoTabuleiro(j1.p6);
-		colocaPecaNoTabuleiro(j1.p7);
-		colocaPecaNoTabuleiro(j1.p8);
-		colocaPecaNoTabuleiro(j2.p1);
-		colocaPecaNoTabuleiro(j2.p2);
-		colocaPecaNoTabuleiro(j2.p3);
-		colocaPecaNoTabuleiro(j2.p4);
-		colocaPecaNoTabuleiro(j2.p5);
-		colocaPecaNoTabuleiro(j2.p6);
-		colocaPecaNoTabuleiro(j2.p7);
-		colocaPecaNoTabuleiro(j2.p8);
-	}
-
-	/**
-	 * Inicializa todas as posi��es do tabuleiro e atribui os valores iniciais
-	 */
-	private void criaTabuleiro() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				Posicao pos = new Posicao();
-				pos.setColuna(j);
-				pos.setLinha(i);
-				pos.setCor(defineCorDaCasa(i, j));
-				pos.setDesenho(defineCorDaCasa(i, j));
-				pos.setOcupada(false);
-
-				tabuleiro[i][j] = pos;
-			}
-		}
-	}
-
-	/**
-	 * Para cada casa do tabuleiro, com base em suas coordenadas, define se ela deve
-	 * ser preta ou branca
-	 * 
-	 * @param i Recebe a linha
-	 * @param j Recebe a coluna
-	 * @return O desenho correspondente da casa vazia com base em sua cor
-	 */
-	public String defineCorDaCasa(int i, int j) {
-		if ((i % 2 == 0) && (j % 2 == 0)) { // se os dois forem pares
-			return " + ";
-		} else if ((i % 2 == 1) && (j % 2 == 1)) { // se os dois fore impares
-			return " + ";
-		} else { // se forem diferentes
-			return " - ";
-		}
+	public void atualizaTabuleiro(int linhaOrigem, int colunaOrigem, int linha, int coluna) {
+		tabuleiro[linha][coluna].setPeca(tabuleiro[linhaOrigem][colunaOrigem].getPeca());
+		tabuleiro[linhaOrigem][colunaOrigem].setOcupada(false);
 	}
 
 	/**
@@ -147,15 +102,27 @@ public class Tabuleiro {
 		for (int i = 0; i < 8; i++) {
 			System.out.printf("%d   ", i);
 			for (int j = 0; j < 8; j++) {
-				System.out.print(tabuleiro[i][j].getDesenho());
+				if (tabuleiro[i][j].getPeca() != null) {
+					System.out.print(" " + tabuleiro[i][j].getPeca().getDesenho() + " ");
+				} else {
+					if ((i % 2 == 0) && (j % 2 == 0)) { // se os dois forem pares
+						System.out.print(" + ");
+					} else if ((i % 2 == 1) && (j % 2 == 1)) { // se os dois fore impares
+						System.out.print(" + ");
+					} else { // se forem diferentes
+						System.out.print(" - ");
+					}
+				}
 				count++;
 				if (count == 8) {
 					System.out.printf("\n");
 					count = 0;
 				}
+
 			}
 		}
-		System.out.printf("\n     a  b  c  d  e  f  g  h\n");
+		// System.out.printf("\n a b c d e f g h\n");
+		System.out.printf("\n     0  1  2  3  4  5  6  7\n");
 	}
 
 	public boolean checaLimitesDoTabuleiro(int linhaDestino, int colunaDestino) {
@@ -184,7 +151,7 @@ public class Tabuleiro {
 			} else {
 				colunaOrigem++;
 			}
-			
+
 			if (tabuleiro[linhaOrigem][colunaOrigem].getOcupada()) {
 				String corQueSeraCapturada = tabuleiro[linhaOrigem][colunaOrigem].getPeca().getCor();
 
@@ -194,14 +161,12 @@ public class Tabuleiro {
 				return false;
 			}
 
-
 		}
 		return true;
 	}
 
 	public boolean naoTemPecaNoCaminhoReta(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		String cor = tabuleiro[linhaOrigem][colunaOrigem].getPeca().getCor();
-		
 
 		if (linhaOrigem == linhaDestino) {
 			while (colunaOrigem != colunaDestino) {
@@ -247,9 +212,10 @@ public class Tabuleiro {
 		return true;
 	}
 
-	public boolean naoTemPecaNoCaminhoPosicaoDestino(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+	public boolean naoTemPecaNoCaminhoPosicaoDestino(int linhaOrigem, int colunaOrigem, int linhaDestino,
+			int colunaDestino) {
 		String cor = tabuleiro[linhaOrigem][colunaOrigem].getPeca().getCor();
-		
+
 		if (tabuleiro[linhaDestino][colunaDestino].getOcupada()) {
 			String corQueSeraCapturada = tabuleiro[linhaDestino][colunaDestino].getPeca().getCor();
 
@@ -260,79 +226,86 @@ public class Tabuleiro {
 		}
 		return true;
 	}
-        
 
-    public boolean reiEmXeque(Rei rei) {
-        
-        int reiLinha = rei.linha;
-        int reiColuna = rei.coluna;
-        String cor = rei.cor;
-        
-        System.out.println("Cor do rei: " + cor);
-        //Verifica se há uma peça da cor oposta que pode atacar o rei, caso sim, o rei está em xeque.
-        
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                Peca peca = tabuleiro[i][j].getPeca();
+	public boolean reiEmXeque(String cor) {
 
-                if (tabuleiro[i][j].getOcupada() && tabuleiro[i][j].getPeca().getCor() != cor) {
+		int reiLinha = 0;
+		int reiColuna = 0;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (tabuleiro[i][j].getOcupada()) {
+					Peca p = tabuleiro[i][j].getPeca();
+					if (p instanceof Rei && p.getCor() == cor) {
+						reiLinha = i;
+						reiColuna = j;
+						break;
+					}
+				}
+			}
+		}
+
+		// Verifica se há uma peça da cor oposta que pode atacar o rei, caso sim, o rei
+		// está em xeque.
+
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Peca peca = tabuleiro[i][j].getPeca();
+
+				if (tabuleiro[i][j].getOcupada() && tabuleiro[i][j].getPeca().getCor() != cor) {
 					if (peca.checaMovimento(i, j, reiLinha, reiColuna)) {
 						return true;
 					}
-                }
+				}
 
-            }
-        }
+			}
+		}
 
-        return false;
+		return false;
 
-    }
-    
-    
-    public boolean reiEmXequeMate(Rei rei) {
-        
-        boolean flag = false;
-        
-        
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-              
-                //Verifica se o rei pode fazer algo pra sair do xeque, se não foi xeque mate
-                
-                for(int a = 0; a <8; a++){
-                    for(int b = 0; b < 8; b++){
-                        Peca peca = tabuleiro[a][b].getPeca();
-                        
-                        if(peca.checaMovimento(i, j, a, b)){
-                            if(tabuleiro[a][b].getOcupada()){
-                                tabuleiro[a][b].getPeca().setCapturada(true);
-                            }
-                            tabuleiro[a][b].setPeca(tabuleiro[i][j].getPeca());
-                            tabuleiro[i][j].setOcupada(false);
-                            
-                            if(!reiEmXeque(rei)) flag = false;
-                            
-                            tabuleiro[i][j].setPeca(tabuleiro[a][b].getPeca());
-                            
-                            if(peca != null){
-                                peca.setCapturada(false);
-                                tabuleiro[a][b].setPeca(peca);
-                            }
-                            
-                            if(!flag) return flag;
-                        }
-                    }
-                }
-                
-                
-            }
-        }
+	}
 
-        return true;
+	// public boolean reiEmXequeMate(String cor) {
 
-    }
+	// boolean flag = false;
 
-    public boolean verificaSePodeCapturar(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+	// for (int i = 0; i < 8; i++) {
+	// for (int j = 0; j < 8; j++) {
+
+	// //Verifica se o rei pode fazer algo pra sair do xeque, se não foi xeque mate
+
+	// for(int a = 0; a <8; a++){
+	// for(int b = 0; b < 8; b++){
+	// Peca peca = tabuleiro[a][b].getPeca();
+
+	// if(peca.checaMovimento(i, j, a, b)){
+	// if(tabuleiro[a][b].getOcupada()){
+	// tabuleiro[a][b].getPeca().captura();;
+	// }
+	// tabuleiro[a][b].setPeca(tabuleiro[i][j].getPeca());
+	// tabuleiro[i][j].setOcupada(false);
+
+	// if(!reiEmXeque(cor)) flag = false;
+
+	// tabuleiro[i][j].setPeca(tabuleiro[a][b].getPeca());
+
+	// if(peca != null){
+	// // peca.setCapturada(false);
+	// tabuleiro[a][b].setPeca(peca);
+	// }
+
+	// if(!flag) return flag;
+	// }
+	// }
+	// }
+
+	// }
+	// }
+
+	// return true;
+
+	// }
+
+	public boolean verificaSePodeCapturar(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		String corDaMinhaPeca, corDaPecaQueSeraCapturada;
 		try { // lança exception se a posicao estiver vazia
 			corDaMinhaPeca = tabuleiro[linhaOrigem][colunaOrigem].getPeca().getCor();
@@ -345,13 +318,85 @@ public class Tabuleiro {
 			return true;
 		}
 
-
 		return false;
 	}
 
 	public Posicao getPosicao(int c1, int c2) {
 		return tabuleiro[c1][c2];
 	}
-     
+
+	/**
+	 * Método que retorna uma peça em uma certa posição Se a posição estiver fora
+	 * dos limites do tabuleiro, retorna uma peça nula caso não haja peças ou se
+	 * estiver fora do tabuleiro
+	 * 
+	 * @param linha  linha da peça
+	 * @param coluna coluna da peça
+	 * @return retorna a peça que está na posição linha, coluna do tabuleiro
+	 */
+	public Peca getPecaPosicao(int linha, int coluna) {
+
+		try {
+			return tabuleiro[linha][coluna].getPeca();
+		} catch (IndexOutOfBoundsException i) {
+			return null;
+		}
+	}
+
+	public boolean checaJogadaValida(Peca p, int linha, int coluna, int c1, int c2) {
+		boolean flag = false;
+
+		if (this.checaLimitesDoTabuleiro(c1, c2)) {
+
+            if(p instanceof Rei){
+                if (this.naoTemPecaNoCaminhoDiagonal(linha, coluna, c1, c2) && this.naoTemPecaNoCaminhoReta(linha, coluna, c1, c2)) {
+                    flag = p.checaMovimento(linha, coluna, c1, c2);
+                }
+
+            } else if(p instanceof Bispo){
+               if (this.naoTemPecaNoCaminhoDiagonal(linha, coluna, c1, c2)) {
+                   flag = p.checaMovimento(linha, coluna, c1, c2);
+               }
+                
+            } else if(p instanceof Dama){
+                if (this.naoTemPecaNoCaminhoDiagonal(linha, coluna, c1, c2) 
+                    && (this.naoTemPecaNoCaminhoReta(linha, coluna, c1, c2))) {
+                        flag = p.checaMovimento(linha, coluna, c1, c2);
+                    }
+
+            } else if(p instanceof Cavalo){
+                if (this.naoTemPecaNoCaminhoPosicaoDestino(linha, coluna, c1, c2)) {
+                    flag = p.checaMovimento(linha, coluna, c1, c2);
+                }
+
+            } else if(p instanceof Peao){
+
+                
+            } else if(p instanceof Torre){
+                if (this.naoTemPecaNoCaminhoReta(linha, coluna, c1, c2)) {
+                    flag = p.checaMovimento(linha, coluna, c1, c2);
+                }
+            }
+            
+            if (flag) {
+                Posicao posicaoComPecaAdversaria = this.getPosicao(c1, c2);
+
+                if (posicaoComPecaAdversaria.getOcupada()) {
+                    posicaoComPecaAdversaria.getPeca().captura();
+                }
+    
+                System.out.println("Movimento v�lido!");
+    
+                this.atualizaTabuleiro(linha, coluna, c1, c2);
+                return true;
+            } else {
+                System.out.println("Movimento inv�lido! Por favor, insira uma coordenada v�lida!");
+            }
+        } else {
+            System.out.println("Coordenada fora dos limites do tabuleiro");
+        }
+
+		return flag;
+	}
 
 }

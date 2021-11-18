@@ -19,12 +19,14 @@ public class Rei extends Peca {
 	 * 
 	 * @param cor  Cor da pe�a (branca/preta)
 	 */
-	public Rei(String co, Tabuleiro tabuleiro) {
-		setTabuleiro(tabuleiro);
-		setCor(cor);
-		capturada = false;
-
-		definePosicaoInicial();
+	public Rei(String cor) {
+		if(cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta"){
+			this.capturada = false;
+                    setCor(cor);
+                    desenha();
+                } else {
+                    System.out.println("Cor atribuída é inválida!");
+                }
 	}
 
 	/**
@@ -33,11 +35,11 @@ public class Rei extends Peca {
 	 * 
 	 * @return Uma String com o desenho correspondente
 	 */
-	public String desenha() {
+	public void desenha() {
 		if (getCor() == "branca") {
-			return " r ";
+			this.desenho = "r";
 		} else { // cor == "preta"
-			return " R ";
+			this.desenho = "R";
 		}
 	}
 
@@ -52,26 +54,13 @@ public class Rei extends Peca {
 	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && tabuleiro.naoTemPecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && tabuleiro.naoTemPecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) {
 			if ((Math.abs(linhaOrigem - linhaDestino) <= 1 && (Math.abs(colunaOrigem - colunaDestino) <= 1))
 					&& (Math.abs(linhaOrigem - linhaDestino) == 1 || 1 == Math.abs(colunaOrigem - colunaDestino))) {
 				return true;
 			}
-		}
-
+	
 		return false;
 	}
-	
-	/**
-	 * De acordo com os atributos da pe�a, faz o set da posi��o que ela dever� estar
-	 * no inicio do jogo
-	 */
-	public void definePosicaoInicial() {
-		if (cor == "branca") {
-			setPosicao(0, 4);
-		} else {
-			setPosicao(7, 4); 
-		}
-	}
+
 
 }

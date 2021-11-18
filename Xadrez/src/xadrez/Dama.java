@@ -18,12 +18,14 @@ public class Dama extends Peca {
 	 * 
 	 * @param cor Cor da pe�a (branca/preta)
 	 */
-	public Dama(String cor, Tabuleiro tabuleiro) {
-		setTabuleiro(tabuleiro);
-		setCor(cor);
-		capturada = false;
-
-		definePosicaoInicial();
+	public Dama(String cor) {
+		if(cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta"){
+			this.capturada = false;
+                    setCor(cor);
+                    desenha();
+                } else {
+                    System.out.println("Cor atribuída é inválida!");
+                }
 	}
 
 	/**
@@ -32,11 +34,11 @@ public class Dama extends Peca {
 	 * 
 	 * @return Uma String com o desenho correspondente
 	 */
-	public String desenha() {
+	public void desenha() {
 		if (getCor() == "branca") {
-			return " d ";
+			this.desenho = "d";
 		} else { // cor == "preta"
-			return " D ";
+			this.desenho = "D";
 		}
 	}
 
@@ -53,7 +55,6 @@ public class Dama extends Peca {
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		boolean flag = false;
 		// fora do tabuleiro
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && (tabuleiro.naoTemPecaNoCaminhoDiagonal(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino) && (tabuleiro.naoTemPecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)))) {
 			// posicoes validas para a dama
 			if (linhaOrigem == linhaDestino)
 				flag = true;
@@ -62,20 +63,10 @@ public class Dama extends Peca {
 			if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino))
 				flag = true;
 
-		}
+		
 
 		return flag;
 	}
 
-	/**
-	 * De acordo com os atributos da pe�a, faz o set da posi��o que ela dever� estar
-	 * no inicio do jogo
-	 */
-	public void definePosicaoInicial() {
-		if (cor == "branca") {
-			setPosicao(0, 3);
-		} else {
-			setPosicao(7, 3);
-		}
-	}
+
 }

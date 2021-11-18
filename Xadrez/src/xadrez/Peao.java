@@ -11,9 +11,7 @@ package xadrez;
  * @author Daniele
  */
 public class Peao extends Peca {
-	private int num;
-	private boolean estadoInicial; // Guarda se � a primeira jogada do peao
-
+	
 	/**
 	 * Construtor do peao, respons�vel por inicializar os atributos e definir a
 	 * posi��o inicial da pe�a no inicio do jogo.
@@ -21,13 +19,14 @@ public class Peao extends Peca {
 	 * @param cor recebe a cor da pe�a
 	 * @param num recebe o id do pe�o
 	 */
-	public Peao(String cor, int num, Tabuleiro tabuleiro) {
-		setTabuleiro(tabuleiro);
-		setCor(cor);
-		setNum(num);
-		capturada = false;
-		definePosicaoInicial();
-		setEstadoInicial(true);
+	public Peao(String cor) {		
+		if(cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta"){
+			this.capturada = false;
+                    setCor(cor);
+                    desenha();
+                } else {
+                    System.out.println("Cor atribuída é inválida!");
+                }
 	}
 
 	/**
@@ -36,21 +35,15 @@ public class Peao extends Peca {
 	 * 
 	 * @return Uma String com o desenho correspondente
 	 */
-	public String desenha() {
+	public void desenha() {
 		if (cor == "branca") {
-			return "p" + num + " ";
+			this.desenho = "p";
 		} else {
-			return "P" + num + " ";
+			this.desenho = "P";
 		}
 	}
 
-	public boolean primeiraJogada(){
-		if(this.estadoInicial){
-			return true;
-		}
-		return false;
-	}
-
+	
 	/**
 	 * Checa se a posi��o informada pelo jogador pertence ao tabuleiro, e ent�o
 	 * verifica se o movimento � v�lido de acordo com as regras da pe�a
@@ -62,60 +55,17 @@ public class Peao extends Peca {
 	 * * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if (tabuleiro.checaLimitesDoTabuleiro(linhaDestino, colunaDestino) && tabuleiro.naoTemPecaNoCaminhoReta(linhaOrigem, colunaOrigem, linhaDestino, colunaDestino)) {
-			if (primeiraJogada()) {
-				if (this.getCor() == "branca") {
-					if (((linhaDestino - linhaOrigem) == 1 || (linhaDestino - linhaOrigem) == 2) && colunaOrigem == colunaDestino) {
-						estadoInicial = false;
-						return true;
-					}
-				} else {
-					if (((linhaOrigem - linhaDestino) == 1 || (linhaOrigem - linhaDestino) == 2) && colunaOrigem == colunaDestino) {
-						estadoInicial = false;
-						return true;
-					}
-				}
-				return false;
-			}
-			if (this.getCor() == "branca") {
-				if ((linhaDestino - linhaOrigem) == 1 && colunaOrigem == colunaDestino)
-					return true;
-			} else {
-				if ((linhaOrigem - linhaDestino) == 1 && colunaOrigem == colunaDestino)
-					return true;
-			}
-		}
+	if (cor == "preta") {
 
-		return false;
-	}
+            return (colunaOrigem == colunaDestino
+                    && ((linhaDestino - linhaOrigem == 1) || (linhaOrigem == 1 && linhaDestino - linhaOrigem == 2)));
 
-	/**
-	 * De acordo com os atributos da pe�a, faz o set da posi��o que ela dever� estar
-	 * no inicio do jogo
-	 */
-	public void definePosicaoInicial() {
-		if (cor == "branca") {
-			setPosicao(1, num - 1);
-		} else {
-			setPosicao(6, num - 1);
-		}
-	}
+        } else {
+            return (colunaOrigem == colunaDestino
+                    && ((linhaOrigem - linhaDestino == 1) || (linhaOrigem == 6 && linhaOrigem - linhaDestino == 2)));
+        }
+    }
+	
 
-	// GETTERS E SETTERS
-	public int getNum() {
-		return num;
-	}
-
-	public void setNum(int num) {
-		this.num = num;
-	}
-
-	public boolean isEstadoInicial() {
-		return estadoInicial;
-	}
-
-	public void setEstadoInicial(boolean estadoInicial) {
-		this.estadoInicial = estadoInicial;
-	}
-
+	
 }
