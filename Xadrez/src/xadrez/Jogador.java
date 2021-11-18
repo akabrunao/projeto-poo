@@ -46,12 +46,5 @@ public class Jogador {
         this.nome = nome;
     }
     
-
-    public boolean reiFoiCapturado() {
-        for (int i = 0; i < 16; i++) {
-            if (this.pecas[i] instanceof Rei)
-                return pecas[i].isCapturada();
-        }
-        return false;
-    }
+    
 }

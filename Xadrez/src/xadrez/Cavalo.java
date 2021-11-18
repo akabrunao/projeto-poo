@@ -55,8 +55,7 @@ public class Cavalo extends Peca {
 	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		// fora do tabuleiro
-
+		if(linhaOrigem == linhaDestino && colunaOrigem == colunaDestino) return false;
 			// posicoes validas para o cavalo
 			if ((linhaOrigem - linhaDestino == -2 || linhaOrigem - linhaDestino == 2)
 					&& (colunaOrigem - colunaDestino == 1 || colunaOrigem - colunaDestino == -1))

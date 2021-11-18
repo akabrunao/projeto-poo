@@ -54,7 +54,7 @@ public class Bispo extends Peca {
 	 * @return true caso o movimento seja valido, false se o movimento for invalido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-
+		if(linhaOrigem == linhaDestino && colunaOrigem == colunaDestino) return false;
 		if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino))
 			return true;
 		return false;

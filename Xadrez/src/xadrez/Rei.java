@@ -54,6 +54,7 @@ public class Rei extends Peca {
 	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+			if(linhaOrigem == linhaDestino && colunaOrigem == colunaDestino) return false;
 			if ((Math.abs(linhaOrigem - linhaDestino) <= 1 && (Math.abs(colunaOrigem - colunaDestino) <= 1))
 					&& (Math.abs(linhaOrigem - linhaDestino) == 1 || 1 == Math.abs(colunaOrigem - colunaDestino))) {
 				return true;

@@ -23,11 +23,12 @@ public class Jogo {
     private int jogada;
 
     /**
-     * Método que recebe os dois jogadores e inicializa o jogo!
+     * @param j1 recebe o jogador 1 do Gerenciador
+     * @param j2 recebe o jogador 2 do Gerenciador
      */
     public void iniciarJogo(Jogador j1, Jogador j2) {
 
-        // Armazena os jogadores recebidos do gerenciador e os entrega as peças!
+        // Armazena os jogadores recebidos do gerenciador e os informa as peças!
 
         jogador1 = j1;
         jogador1.setPeca(criarPecas(jogador1.getCor()));
@@ -37,6 +38,7 @@ public class Jogo {
 
         // Cria o tabuleiro
         this.tabuleiro = new Tabuleiro(jogador1.getPecas(), jogador2.getPecas());
+
         estadoJogo = 0; // Inicio
         this.jogada = 0; // Jogador 1 começa
 
@@ -45,28 +47,36 @@ public class Jogo {
         jogar();
     }
 
+
+
+    /**
+     * @param cor recebe a cor do Jogador e cria suas respectivas peças
+     */
     private Peca[] criarPecas(String cor) {
         Peca[] p = new Peca[16];
-
-        for (int i = 0; i < 16; i++) {
-            if (i < 8) {
-                p[i] = new Peao(cor);
-            } else if (i < 10) {
-                p[i] = new Torre(cor);
-            } else if (i < 12) {
-                p[i] = new Cavalo(cor);
-            } else if (i < 14) {
-                p[i] = new Bispo(cor);
-            } else if (i == 14) {
-                p[i] = new Dama(cor);
-            } else if (i == 15) {
-                p[i] = new Rei(cor);
-            }
-
-        }
+        p[0] = new Peao(cor);
+        p[1] = new Peao(cor);
+        p[2] = new Peao(cor);
+        p[3] = new Peao(cor);
+        p[4] = new Peao(cor);
+        p[5] = new Peao(cor);
+        p[6] = new Peao(cor);
+        p[7] = new Peao(cor);
+        p[8] = new Torre(cor);
+        p[9] = new Torre(cor);
+        p[10] = new Cavalo(cor);
+        p[11] = new Cavalo(cor);
+        p[12] = new Bispo(cor);
+        p[13] = new Bispo(cor);
+        p[14] = new Dama(cor);
+        p[15] = new Rei(cor);
         return p;
     }
 
+
+    /**
+     * retorna qual é o jogador da vez, de acordo com o valor do atributo jogada.
+     */
     private Jogador getJogadorDaVez() {
         if (jogada == 0)
             return jogador1;
@@ -74,6 +84,9 @@ public class Jogo {
             return jogador2;
     }
 
+    /**
+     * muda o atributo jogada, fazendo com que seja a vez do próximo jogador.
+     */
     private void passarVezJogador() {
         if (jogada == 0) {
             jogada = 1;
@@ -82,20 +95,32 @@ public class Jogo {
         }
     }
 
+
+    /**
+     * Método que verifica se a peça 
+     * 
+     * @param p recebe a peça que deseja ser movimentada
+     * @param linha recebe a linha origem da peça
+     * @param coluna recebe a coluna origem da peça
+     * @return return se a peça foi movida ou não
+     */
     private boolean moverPosicao(Peca p, int linha, int coluna) {
 
         System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
-        int c1 = scanner.nextInt();
-        int c2 = scanner.nextInt();
-
-        if (linha == c1 && coluna == c2) {
+        int l = scanner.nextInt();
+        char cc = scanner.nextLine().charAt(1);
+        int c = cc - 97;
+        if (linha == l && coluna == c) {
             System.out.println("Não é possível mover a peca para a posição que ela já está, tente outra coordenada.");
 			return false;
 		}
 
-        return tabuleiro.checaJogadaValida(p, linha, coluna, c1, c2);
+        return tabuleiro.checaJogadaValida(p, linha, coluna, l, c);
     }
 
+    /**
+     * Método que controla o jogo em si, interagindo com o usuário
+     */
     public void jogar() {
         while (true) {
             Jogador jogador = getJogadorDaVez();
@@ -122,30 +147,35 @@ public class Jogo {
             System.out.println("Vez do jogador: " + jogador.getNome());
 
             
+        
+             //Confere se o rei está em xeque mate
+             if (tabuleiro.reiEmXequeMate("branca")) {
+                System.out.println("Rei do jogador: " + jogador1.getNome() + " está em xeque mate!");
+                System.out.println("O jogo acabou. Jogador " + jogador2.getNome() + " é o vencedor!");
+                break;
+            } else if (tabuleiro.reiEmXequeMate("preta")) {
+                System.out.println("Rei do jogador: " + jogador2.getNome() + " está em xeque mate!");
+                System.out.println("O jogo acabou. Jogador " + jogador1.getNome() + " é o vencedor!");
+                break;
+            }
 
-
-
+            //Confere se o rei está em xeque
             if (tabuleiro.reiEmXeque("branca")) {
                 System.out.println("Rei do jogador: " + jogador1.getNome() + " está em xeque!");
-            } else if (tabuleiro.reiEmXeque("preta")) {
+            }
+            else if (tabuleiro.reiEmXeque("preta")) {
                 System.out.println("Rei do jogador: " + jogador2.getNome() + " está em xeque!");
             }
 
-            // if (tabuleiro.reiEmXequeMate("branca")) {
-            //     System.out.println("Rei do jogador: " + jogador1.getNome() + " está em xeque mate!");
-            //     System.out.println("Fim de Jogo!");
-            //     break;
-            // } else if (tabuleiro.reiEmXequeMate("preta")) {
-            //     System.out.println("Rei do jogador: " + jogador1.getNome() + " está em xeque mate!");
-            //     System.out.println("Fim de Jogo!");
-            //     break;
-            // }
+           
 
             System.out.println("Insira a coordenada da peça que deseja mover!");
             int linha;
             int coluna;
             linha = scanner.nextInt();
-            coluna = scanner.nextInt();
+            char cc = scanner.nextLine().charAt(1);
+            // Recebe a coluna em char (letras) e transforma-a para int, segundo o funcionamento interno do jogo.
+            coluna = cc - 97;
 
             if (tabuleiro.getPecaPosicao(linha, coluna) == null) {
                 System.out.println("Jogada inválida!");
@@ -153,7 +183,7 @@ public class Jogo {
                 if (tabuleiro.getPecaPosicao(linha, coluna).getCor() == jogador.getCor()) {
                     if (tabuleiro.getPecaPosicao(linha, coluna).isCapturada()) {
                         System.out.println("Essa peça já foi capturada, escolha outra");
-                        continue;
+                        continue;   
                     }
                     while (!moverPosicao(tabuleiro.getPecaPosicao(linha, coluna), linha, coluna));
                     passarVezJogador();

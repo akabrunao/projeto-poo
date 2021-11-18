@@ -23,15 +23,13 @@ public class Gerenciador {
         
         System.out.println("Programa rodando...");
 		System.out.println("BEM VINDO AO JOGO DE XADREZ!");
-		System.out.println("Por gentileza, insira o nome do jogador 1 (pe�as brancas):");
+		System.out.println("Por gentileza, insira o nome do jogador 1 (peças brancas):");
 
-		// Cria os jogadores
-        
-
+		//Cria os jogadores
 		Jogador j1 = new Jogador("branca");
 		String nome = scanner.nextLine();
 		j1.setNome(nome);
-		System.out.println("Por gentileza, insira o nome do jogador 2 (pe�as pretas):");
+		System.out.println("Por gentileza, insira o nome do jogador 2 (peças pretas):");
 		Jogador j2 = new Jogador("preta");
 		nome = scanner.nextLine();
 		j2.setNome(nome);

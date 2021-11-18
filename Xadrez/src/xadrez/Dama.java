@@ -19,13 +19,13 @@ public class Dama extends Peca {
 	 * @param cor Cor da pe�a (branca/preta)
 	 */
 	public Dama(String cor) {
-		if(cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta"){
+		if (cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta") {
 			this.capturada = false;
-                    setCor(cor);
-                    desenha();
-                } else {
-                    System.out.println("Cor atribuída é inválida!");
-                }
+			setCor(cor);
+			desenha();
+		} else {
+			System.out.println("Cor atribuída é inválida!");
+		}
 	}
 
 	/**
@@ -53,20 +53,18 @@ public class Dama extends Peca {
 	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
+		if (linhaOrigem == linhaDestino && colunaOrigem == colunaDestino)
+			return false;
+		// posicoes validas para a dama
 		boolean flag = false;
-		// fora do tabuleiro
-			// posicoes validas para a dama
-			if (linhaOrigem == linhaDestino)
-				flag = true;
-			if (colunaOrigem == colunaDestino)
-				flag = true;
-			if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino))
-				flag = true;
-
-		
+		if (linhaOrigem == linhaDestino)
+			flag = true;
+		if (colunaOrigem == colunaDestino)
+			flag = true;
+		if (Math.abs(linhaOrigem - linhaDestino) == Math.abs(colunaOrigem - colunaDestino))
+			flag = true;
 
 		return flag;
 	}
-
 
 }
