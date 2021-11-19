@@ -28,15 +28,13 @@ public class Bispo extends Peca {
 	}
 
 	/**
-	 * De acordo com os atributos da pe�a, retorna o desenho correspondente para que
-	 * possa ser impresso no tabuleiro
-	 * 
-	 * @return Uma String com o desenho correspondente
+	 * De acordo com a cor da peça define qual o desenho deve ser
+         * impresso no tabuleiro.
 	 */
 	public void desenha() {
-		if (cor == "branca") {
+		if (this.cor == "branca") {
 			this.desenho = "b";
-		} else if (cor == "preta") {
+		} else if (this.cor == "preta") {
 			this.desenho = "B";
 		} else {
 			System.out.println("Cor inválida!");

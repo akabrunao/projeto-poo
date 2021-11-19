@@ -13,10 +13,10 @@ package xadrez;
 public class Dama extends Peca {
 
 	/**
-	 * Construtor da dama, respons�vel por inicializar os atributos e definir a
-	 * posi��o inicial da pe�a no inicio do jogo.
+	 * Construtor do cavalo, responsavel por inicializar os atributos e definir a
+	 * posicao inicial da peca no inicio do jogo.
 	 * 
-	 * @param cor Cor da pe�a (branca/preta)
+	 * @param cor  Cor da peca (branca/preta)
 	 */
 	public Dama(String cor) {
 		if (cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta") {
@@ -29,10 +29,8 @@ public class Dama extends Peca {
 	}
 
 	/**
-	 * De acordo com os atributos da pe�a, retorna o desenho correspondente para que
-	 * possa ser impresso no tabuleiro
-	 * 
-	 * @return Uma String com o desenho correspondente
+	 * De acordo com a cor da peça define qual o desenho deve ser
+         * impresso no tabuleiro.
 	 */
 	public void desenha() {
 		if (getCor() == "branca") {
@@ -43,14 +41,14 @@ public class Dama extends Peca {
 	}
 
 	/**
-	 * Checa se a posi��o informada pelo jogador pertence ao tabuleiro, e ent�o
-	 * verifica se o movimento � v�lido de acordo com as regras da pe�a
+	 * Checa se a posicao informada pelo jogador pertence ao tabuleiro, e entao
+	 * verifica se o movimento é valido de acordo com as regras da peca
 	 * 
-	 * @param linhaOrigem   A linha da posi��o que a pe�a estava
-	 * @param colunaOrigem  A coluna da posi��o que a pe�a estava
-	 * @param linhaDestino  A linha da posi��o que a pe�a ir�
-	 * @param colunaDestino A coluna da posi��o que a pe�a ir�
-	 * @return true caso o movimento seja v�lido, false se o movimento for inv�lido
+	 * @param linhaOrigem   A linha da posicao que a peca estava
+	 * @param colunaOrigem  A coluna da posicao que a peca estava
+	 * @param linhaDestino  A linha da posicao que a peca ira
+	 * @param colunaDestino A coluna da posicao que a peca ira
+	 * @return true caso o movimento seja valido, false se o movimento for invalido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
 		if (linhaOrigem == linhaDestino && colunaOrigem == colunaDestino)

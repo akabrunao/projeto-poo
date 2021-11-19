@@ -22,21 +22,22 @@ public class Gerenciador {
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Programa rodando...");
-		System.out.println("BEM VINDO AO JOGO DE XADREZ!");
-		System.out.println("Por gentileza, insira o nome do jogador 1 (peças brancas):");
+	System.out.println("BEM VINDO AO JOGO DE XADREZ!");
+        
+	System.out.println("Por gentileza, insira o nome do jogador 1 (cor branca):");
+	Jogador j1 = new Jogador("branca");
+	String nome = scanner.nextLine();
+	j1.setNome(nome);
+        
+        
+	System.out.println("Por gentileza, insira o nome do jogador 2 (cor preta):");
+	Jogador j2 = new Jogador("preta");
+	nome = scanner.nextLine();
+	j2.setNome(nome);
 
-		//Cria os jogadores
-		Jogador j1 = new Jogador("branca");
-		String nome = scanner.nextLine();
-		j1.setNome(nome);
-		System.out.println("Por gentileza, insira o nome do jogador 2 (peças pretas):");
-		Jogador j2 = new Jogador("preta");
-		nome = scanner.nextLine();
-		j2.setNome(nome);
+	jogo.iniciarJogo(j1, j2);
 
-		jogo.iniciarJogo(j1, j2);
-
-		scanner.close();
+	scanner.close();
         
 		
 

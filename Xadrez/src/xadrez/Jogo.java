@@ -14,12 +14,10 @@ import java.util.Scanner;
  * @author Daniele
  */
 public class Jogo {
-
-    private Scanner scanner = new Scanner(System.in);
     private Tabuleiro tabuleiro;
     private Jogador jogador1;
     private Jogador jogador2;
-    private int estadoJogo;
+    private String estadoJogo;
     private int jogada;
 
     /**
@@ -30,16 +28,16 @@ public class Jogo {
 
         // Armazena os jogadores recebidos do gerenciador e os informa as peças!
 
-        jogador1 = j1;
+        this.jogador1 = j1;
         jogador1.setPeca(criarPecas(jogador1.getCor()));
 
-        jogador2 = j2;
+        this.jogador2 = j2;
         jogador2.setPeca(criarPecas(jogador2.getCor()));
 
         // Cria o tabuleiro
         this.tabuleiro = new Tabuleiro(jogador1.getPecas(), jogador2.getPecas());
 
-        estadoJogo = 0; // Inicio
+        this.estadoJogo = "Início";
         this.jogada = 0; // Jogador 1 começa
 
         System.out.println("Programa rodando...");
@@ -50,18 +48,16 @@ public class Jogo {
 
 
     /**
-     * @param cor recebe a cor do Jogador e cria suas respectivas peças
+     * 
+     * @param cor recebe a cor da peça
+     * @return um vetor de peças
      */
     private Peca[] criarPecas(String cor) {
         Peca[] p = new Peca[16];
-        p[0] = new Peao(cor);
-        p[1] = new Peao(cor);
-        p[2] = new Peao(cor);
-        p[3] = new Peao(cor);
-        p[4] = new Peao(cor);
-        p[5] = new Peao(cor);
-        p[6] = new Peao(cor);
-        p[7] = new Peao(cor);
+        for(int i = 0; i<8; i++){
+          p[i] = new Peao(cor);  
+        }
+        
         p[8] = new Torre(cor);
         p[9] = new Torre(cor);
         p[10] = new Cavalo(cor);
@@ -75,7 +71,8 @@ public class Jogo {
 
 
     /**
-     * retorna qual é o jogador da vez, de acordo com o valor do atributo jogada.
+     * 
+     * @return qual o jogador da rodada
      */
     private Jogador getJogadorDaVez() {
         if (jogada == 0)
@@ -107,15 +104,40 @@ public class Jogo {
     private boolean moverPosicao(Peca p, int linha, int coluna) {
 
         System.out.println("Por gentileza, insira a coordenada em que deseja mover-se!");
-        int l = scanner.nextInt();
-        char cc = scanner.nextLine().charAt(1);
+        int l = 0;
+        char cc = 'a';
+
+        boolean pronto = false;
+            while(!pronto){
+                try{
+                    Scanner ler = new Scanner(System.in);
+                    l = ler.nextInt();
+                    cc = ler.nextLine().charAt(1);
+                    pronto = true;
+                }catch(Exception e){
+                    System.out.println("Por favor, insira a coordenada corretamente!");
+                }
+            }
+            
         int c = cc - 97;
+        l = l - 1;
+        
+        
         if (linha == l && coluna == c) {
             System.out.println("Não é possível mover a peca para a posição que ela já está, tente outra coordenada.");
 			return false;
-		}
+	}
+        
+        if(!tabuleiro.checaJogadaValida(p, linha, coluna, l, c)){
+            System.out.println("Jogada inválida!");
+            return false;
+        }
 
-        return tabuleiro.checaJogadaValida(p, linha, coluna, l, c);
+        return true;
+    }
+    
+    private void printarEstadoJogo(){
+        System.out.println("ESTADO DO JOGO: " + this.estadoJogo);
     }
 
     /**
@@ -128,54 +150,80 @@ public class Jogo {
             Peca[] p = jogador.getPecas();
 
             tabuleiro.printTabuleiro();
-
+            
+            
 
             if(p[15].isCapturada()){
                 System.out.println("Rei foi capturado. O jogo acabou!");
                     if(p[15].getCor() == "branca"){
                             System.out.println("O " + jogador2.getNome() + " foi o vencedor!");
-                            this.estadoJogo = 1;
+                            this.estadoJogo = "Fim";
                         } else {
                             System.out.println("O " + jogador1.getNome() + " foi o vencedor!");
-                            this.estadoJogo = 1;
+                            this.estadoJogo = "Fim"; 
+                             
                         }
-
+                printarEstadoJogo();
                 break;
             }
 
 
             System.out.println("Vez do jogador: " + jogador.getNome());
-
+            printarEstadoJogo();
+            
+             
             
         
              //Confere se o rei está em xeque mate
              if (tabuleiro.reiEmXequeMate("branca")) {
-                System.out.println("Rei do jogador: " + jogador1.getNome() + " está em xeque mate!");
+                System.out.println("Rei do jogador " + jogador1.getNome() + " está em xeque mate!");
                 System.out.println("O jogo acabou. Jogador " + jogador2.getNome() + " é o vencedor!");
+                this.estadoJogo = "Xeque-Mate";
+                printarEstadoJogo();
                 break;
             } else if (tabuleiro.reiEmXequeMate("preta")) {
-                System.out.println("Rei do jogador: " + jogador2.getNome() + " está em xeque mate!");
+                System.out.println("Rei do jogador " + jogador2.getNome() + " está em xeque mate!");
                 System.out.println("O jogo acabou. Jogador " + jogador1.getNome() + " é o vencedor!");
+                this.estadoJogo = "Xeque-Mate";
+                printarEstadoJogo();
                 break;
+            } else {
+                this.estadoJogo = "Em andamento";
             }
 
             //Confere se o rei está em xeque
             if (tabuleiro.reiEmXeque("branca")) {
                 System.out.println("Rei do jogador: " + jogador1.getNome() + " está em xeque!");
+                this.estadoJogo = "Xeque";
             }
             else if (tabuleiro.reiEmXeque("preta")) {
                 System.out.println("Rei do jogador: " + jogador2.getNome() + " está em xeque!");
+                this.estadoJogo = "Xeque";
+            } else {
+                this.estadoJogo = "Em andamento";
             }
 
            
 
             System.out.println("Insira a coordenada da peça que deseja mover!");
-            int linha;
-            int coluna;
-            linha = scanner.nextInt();
-            char cc = scanner.nextLine().charAt(1);
+            int linha = 0;
+            int coluna = 0;
+            char cc = 'a';
+            
+            boolean pronto = false;
+            while(!pronto){
+                try{
+                    Scanner ler = new Scanner(System.in);
+                    linha = ler.nextInt();
+                    cc = ler.nextLine().charAt(1);
+                    pronto = true;
+                }catch(Exception e){
+                    System.out.println("Por favor, insira a coordenada corretamente");
+                }
+            }
             // Recebe a coluna em char (letras) e transforma-a para int, segundo o funcionamento interno do jogo.
             coluna = cc - 97;
+            linha = linha - 1;
 
             if (tabuleiro.getPecaPosicao(linha, coluna) == null) {
                 System.out.println("Jogada inválida!");
@@ -185,6 +233,11 @@ public class Jogo {
                         System.out.println("Essa peça já foi capturada, escolha outra");
                         continue;   
                     }
+                    if(tabuleiro.pecaCercada(tabuleiro.getPecaPosicao(linha, coluna), linha, coluna)){
+                        System.out.println("Essa peça está cercada, portanto não pode se mover. Escolha outra peça!");
+                        continue;  
+                    }
+                    
                     while (!moverPosicao(tabuleiro.getPecaPosicao(linha, coluna), linha, coluna));
                     passarVezJogador();
                 } else {

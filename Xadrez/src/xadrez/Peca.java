@@ -21,11 +21,12 @@ public abstract class Peca {
 	protected void captura() {
 		capturada = true;
 	}
-	
 	protected boolean isCapturada() {
 		return capturada;
 	}
-
+	protected void setCapturada(boolean capturada) {
+		this.capturada = capturada;
+	}
 	protected String getCor() {
 		return cor;
 	}
@@ -35,7 +36,8 @@ public abstract class Peca {
         
         protected String getDesenho(){
         return this.desenho;
-      }
+       }
+        
 
 	
 }

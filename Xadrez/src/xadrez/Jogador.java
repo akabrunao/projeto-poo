@@ -18,20 +18,23 @@ public class Jogador {
     private String cor;
 
     public Jogador(String cor) {
-        this.cor = cor;
+        if(cor == "branca" || cor == "preta"){
+             this.cor = cor;
+        } else {
+            System.out.println("Cor inválida!");
+        }
     }
 
-    /**
-     * retorna o vetor de peças do jogador
-     * 
-     * @return vetor de objetos do tipo Peca
-     */
     public Peca[] getPecas() {
         return pecas;
     }
     
     public void setPeca(Peca[] p) {
-        this.pecas = p;
+        if(p[0].getCor() == this.cor){
+            this.pecas = p;
+        } else {
+            System.out.println("Jogador não pode receber peças da cor oposta a sua!");
+        }
     }
 
     public String getCor() {
@@ -45,6 +48,5 @@ public class Jogador {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
     
 }
