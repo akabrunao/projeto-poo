@@ -7,37 +7,29 @@ package xadrez;
 
 /**
  *
- * @author
+ * @author Bruno
  */
 public abstract class Peca {
 	protected boolean capturada;
 	protected String cor;
-        protected String desenho = "";
-	
-	
-        protected abstract void desenha();
+	protected String desenho;
+
+	protected abstract void desenha();
 	protected abstract boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino);
-	
+
 	protected void captura() {
 		capturada = true;
 	}
+
+	protected String desenho() {
+		return desenho;
+	}
+
 	protected boolean isCapturada() {
 		return capturada;
 	}
-	protected void setCapturada(boolean capturada) {
-		this.capturada = capturada;
-	}
+
 	protected String getCor() {
 		return cor;
 	}
-	protected void setCor(String cor) {
-		this.cor = cor;
-	}
-        
-        protected String getDesenho(){
-        return this.desenho;
-       }
-        
-
-	
 }

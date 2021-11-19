@@ -6,7 +6,7 @@
 package xadrez;
 
 /**
- * Classe respons�vel pela pe�a "Dama"
+ * Classe responsavel pela peca "Dama"
  * 
  * @author Bruno
  */
@@ -21,18 +21,16 @@ public class Dama extends Peca {
 	public Dama(String cor) {
 		if (cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta") {
 			this.capturada = false;
-			setCor(cor);
+			this.cor = cor;
 			desenha();
-		} else {
-			System.out.println("Cor atribuída é inválida!");
-		}
+		} 
 	}
 
 	/**
 	 * De acordo com a cor da peça define qual o desenho deve ser
-         * impresso no tabuleiro.
+     * impresso no tabuleiro.
 	 */
-	public void desenha() {
+	protected void desenha() {
 		if (getCor() == "branca") {
 			this.desenho = "d";
 		} else { // cor == "preta"
@@ -41,8 +39,7 @@ public class Dama extends Peca {
 	}
 
 	/**
-	 * Checa se a posicao informada pelo jogador pertence ao tabuleiro, e entao
-	 * verifica se o movimento é valido de acordo com as regras da peca
+	 * Checa se a peca pode executar o movimento informado pelo usuario
 	 * 
 	 * @param linhaOrigem   A linha da posicao que a peca estava
 	 * @param colunaOrigem  A coluna da posicao que a peca estava

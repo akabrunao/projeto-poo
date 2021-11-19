@@ -16,35 +16,30 @@ public class Cavalo extends Peca {
 	 * Construtor do cavalo, responsavel por inicializar os atributos e definir a
 	 * posicao inicial da peca no inicio do jogo.
 	 * 
-	 * @param cor  Cor da peca (branca/preta)
+	 * @param cor Cor da peca (branca/preta)
 	 */
 	public Cavalo(String cor) {
-                if(cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta"){
-		    this.capturada = false;
-                    setCor(cor);
-                    desenha();
-                } else {
-                    System.out.println("Cor atribuída é inválida!");
-                }
-	}
-
-	/**
-	 * De acordo com a cor da peça define qual o desenho deve ser
-         * impresso no tabuleiro.
-	 */
-	public void desenha() {
-		if (this.cor == "branca") {
-			this.desenho = "c";
-		} else if (this.cor == "preta") {
-			this.desenho = "C";
-		} else {
-			System.out.println("Cor inválida!");
+		if (cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta") {
+			this.capturada = false;
+			this.cor = cor;
+			desenha();
 		}
 	}
 
 	/**
-	 * Checa se a posicao informada pelo jogador pertence ao tabuleiro, e entao
-	 * verifica se o movimento é valido de acordo com as regras da peca
+	 * De acordo com a cor da peça define qual o desenho deve ser impresso no
+	 * tabuleiro.
+	 */
+	protected void desenha() {
+		if (this.cor == "branca") {
+			this.desenho = "c";
+		} else if (this.cor == "preta") {
+			this.desenho = "C";
+		}
+	}
+
+	/**
+	 * Checa se a peca pode executar o movimento informado pelo usuario
 	 * 
 	 * @param linhaOrigem   A linha da posicao que a peca estava
 	 * @param colunaOrigem  A coluna da posicao que a peca estava
@@ -53,19 +48,17 @@ public class Cavalo extends Peca {
 	 * @return true caso o movimento seja valido, false se o movimento for invalido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if(linhaOrigem == linhaDestino && colunaOrigem == colunaDestino) return false;
-			// posicoes validas para o cavalo
-			if ((linhaOrigem - linhaDestino == -2 || linhaOrigem - linhaDestino == 2)
-					&& (colunaOrigem - colunaDestino == 1 || colunaOrigem - colunaDestino == -1))
-				return true;
-			if ((colunaOrigem - colunaDestino == -2 || colunaOrigem - colunaDestino == 2)
-					&& (linhaOrigem - linhaDestino == 1 || linhaOrigem - linhaDestino == -1))
-				return true;
-		
+		if (linhaOrigem == linhaDestino && colunaOrigem == colunaDestino)
+			return false;
+		// posicoes validas para o cavalo
+		if ((linhaOrigem - linhaDestino == -2 || linhaOrigem - linhaDestino == 2)
+				&& (colunaOrigem - colunaDestino == 1 || colunaOrigem - colunaDestino == -1))
+			return true;
+		if ((colunaOrigem - colunaDestino == -2 || colunaOrigem - colunaDestino == 2)
+				&& (linhaOrigem - linhaDestino == 1 || linhaOrigem - linhaDestino == -1))
+			return true;
 
 		return false;
 	}
-
-
 
 }

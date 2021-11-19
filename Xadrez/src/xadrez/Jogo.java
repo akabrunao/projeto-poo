@@ -8,12 +8,13 @@ package xadrez;
 import java.util.Scanner;
 
 /**
- * Classe que lida com tudo relacionado ao jogo, como a inicializa��o do mesmo e
+ * Classe que lida com tudo relacionado ao jogo, como a inicializacao do mesmo e
  * o gerenciamento das jogadas.
  *
  * @author Daniele
  */
 public class Jogo {
+
     private Tabuleiro tabuleiro;
     private Jogador jogador1;
     private Jogador jogador2;
@@ -21,13 +22,14 @@ public class Jogo {
     private int jogada;
 
     /**
+     * método que faz a configuracao inicial do jogo e inicializa o mesmo
+     * 
      * @param j1 recebe o jogador 1 do Gerenciador
      * @param j2 recebe o jogador 2 do Gerenciador
      */
     public void iniciarJogo(Jogador j1, Jogador j2) {
 
         // Armazena os jogadores recebidos do gerenciador e os informa as peças!
-
         this.jogador1 = j1;
         jogador1.setPeca(criarPecas(jogador1.getCor()));
 
@@ -37,7 +39,7 @@ public class Jogo {
         // Cria o tabuleiro
         this.tabuleiro = new Tabuleiro(jogador1.getPecas(), jogador2.getPecas());
 
-        this.estadoJogo = "Início";
+        this.estadoJogo = "Inicio";
         this.jogada = 0; // Jogador 1 começa
 
         System.out.println("Programa rodando...");
@@ -45,19 +47,18 @@ public class Jogo {
         jogar();
     }
 
-
-
     /**
-     * 
-     * @param cor recebe a cor da peça
+     * método que cria as pecas do jogador
+     *
+     * @param cor recebe a cor do jogador
      * @return um vetor de peças
      */
     private Peca[] criarPecas(String cor) {
         Peca[] p = new Peca[16];
-        for(int i = 0; i<8; i++){
-          p[i] = new Peao(cor);  
+        for (int i = 0; i < 8; i++) {
+            p[i] = new Peao(cor);
         }
-        
+
         p[8] = new Torre(cor);
         p[9] = new Torre(cor);
         p[10] = new Cavalo(cor);
@@ -69,20 +70,21 @@ public class Jogo {
         return p;
     }
 
-
     /**
-     * 
+     * Método que retorna o jogador da rodada
+     *
      * @return qual o jogador da rodada
      */
     private Jogador getJogadorDaVez() {
-        if (jogada == 0)
+        if (jogada == 0) {
             return jogador1;
-        else
+        } else {
             return jogador2;
+        }
     }
 
     /**
-     * muda o atributo jogada, fazendo com que seja a vez do próximo jogador.
+     * muda o atributo jogada, fazendo com que seja a vez do proximo jogador.
      */
     private void passarVezJogador() {
         if (jogada == 0) {
@@ -92,10 +94,9 @@ public class Jogo {
         }
     }
 
-
     /**
-     * Método que verifica se a peça 
-     * 
+     * Método que le o movimento e checa se a jogada é valida
+     *
      * @param p recebe a peça que deseja ser movimentada
      * @param linha recebe a linha origem da peça
      * @param coluna recebe a coluna origem da peça
@@ -108,35 +109,38 @@ public class Jogo {
         char cc = 'a';
 
         boolean pronto = false;
-            while(!pronto){
-                try{
-                    Scanner ler = new Scanner(System.in);
-                    l = ler.nextInt();
-                    cc = ler.nextLine().charAt(1);
-                    pronto = true;
-                }catch(Exception e){
-                    System.out.println("Por favor, insira a coordenada corretamente!");
-                }
+        Scanner ler = new Scanner(System.in);
+        while (!pronto) {
+            try {
+                l = ler.nextInt();
+                cc = ler.next().charAt(0);
+                System.out.println(cc);
+                pronto = true;
+            } catch (Exception e) {
+                System.out.println("Por favor, insira a coordenada corretamente!");
             }
-            
+        }
+        
         int c = cc - 97;
         l = l - 1;
         
-        
         if (linha == l && coluna == c) {
             System.out.println("Não é possível mover a peca para a posição que ela já está, tente outra coordenada.");
-			return false;
-	}
+            return false;
+        }
         
-        if(!tabuleiro.checaJogadaValida(p, linha, coluna, l, c)){
+        if (!tabuleiro.checaJogadaValida(p, linha, coluna, l, c)) {
             System.out.println("Jogada inválida!");
             return false;
         }
-
+        
         return true;
     }
-    
-    private void printarEstadoJogo(){
+
+    /**
+     * método que printa no console o estado atual do jogo
+     */
+    private void printarEstadoJogo() {
         System.out.println("ESTADO DO JOGO: " + this.estadoJogo);
     }
 
@@ -150,32 +154,24 @@ public class Jogo {
             Peca[] p = jogador.getPecas();
 
             tabuleiro.printTabuleiro();
-            
-            
 
-            if(p[15].isCapturada()){
+            //Confere se o rei foi capturado ou não
+            if (p[15].isCapturada()) {
                 System.out.println("Rei foi capturado. O jogo acabou!");
-                    if(p[15].getCor() == "branca"){
-                            System.out.println("O " + jogador2.getNome() + " foi o vencedor!");
-                            this.estadoJogo = "Fim";
-                        } else {
-                            System.out.println("O " + jogador1.getNome() + " foi o vencedor!");
-                            this.estadoJogo = "Fim"; 
-                             
-                        }
+                if (p[15].getCor() == "branca") {
+                    System.out.println("O " + jogador2.getNome() + " foi o vencedor!");
+                    this.estadoJogo = "Fim";
+                } else {
+                    System.out.println("O " + jogador1.getNome() + " foi o vencedor!");
+                    this.estadoJogo = "Fim";
+
+                }
                 printarEstadoJogo();
                 break;
             }
 
-
-            System.out.println("Vez do jogador: " + jogador.getNome());
-            printarEstadoJogo();
-            
-             
-            
-        
-             //Confere se o rei está em xeque mate
-             if (tabuleiro.reiEmXequeMate("branca")) {
+            //Confere se o rei está em xeque mate
+            if (tabuleiro.reiEmXequeMate("branca")) {
                 System.out.println("Rei do jogador " + jogador1.getNome() + " está em xeque mate!");
                 System.out.println("O jogo acabou. Jogador " + jogador2.getNome() + " é o vencedor!");
                 this.estadoJogo = "Xeque-Mate";
@@ -195,59 +191,56 @@ public class Jogo {
             if (tabuleiro.reiEmXeque("branca")) {
                 System.out.println("Rei do jogador: " + jogador1.getNome() + " está em xeque!");
                 this.estadoJogo = "Xeque";
-            }
-            else if (tabuleiro.reiEmXeque("preta")) {
+            } else if (tabuleiro.reiEmXeque("preta")) {
                 System.out.println("Rei do jogador: " + jogador2.getNome() + " está em xeque!");
                 this.estadoJogo = "Xeque";
             } else {
                 this.estadoJogo = "Em andamento";
             }
 
-           
+            System.out.println("Vez do jogador: " + jogador.getNome());
+            printarEstadoJogo();
 
             System.out.println("Insira a coordenada da peça que deseja mover!");
             int linha = 0;
             int coluna = 0;
             char cc = 'a';
-            
+
             boolean pronto = false;
-            while(!pronto){
-                try{
-                    Scanner ler = new Scanner(System.in);
+            Scanner ler = new Scanner(System.in);
+            while (!pronto) {
+                try {
                     linha = ler.nextInt();
-                    cc = ler.nextLine().charAt(1);
+                    cc = ler.next().charAt(0);
                     pronto = true;
-                }catch(Exception e){
+                } catch (Exception e) {
                     System.out.println("Por favor, insira a coordenada corretamente");
                 }
             }
             // Recebe a coluna em char (letras) e transforma-a para int, segundo o funcionamento interno do jogo.
             coluna = cc - 97;
             linha = linha - 1;
-
+            
             if (tabuleiro.getPecaPosicao(linha, coluna) == null) {
                 System.out.println("Jogada inválida!");
             } else {
                 if (tabuleiro.getPecaPosicao(linha, coluna).getCor() == jogador.getCor()) {
                     if (tabuleiro.getPecaPosicao(linha, coluna).isCapturada()) {
                         System.out.println("Essa peça já foi capturada, escolha outra");
-                        continue;   
+                        continue;
                     }
-                    if(tabuleiro.pecaCercada(tabuleiro.getPecaPosicao(linha, coluna), linha, coluna)){
+                    if (tabuleiro.pecaCercada(tabuleiro.getPecaPosicao(linha, coluna), linha, coluna)) {
                         System.out.println("Essa peça está cercada, portanto não pode se mover. Escolha outra peça!");
-                        continue;  
+                        continue;
                     }
-                    
+
                     while (!moverPosicao(tabuleiro.getPecaPosicao(linha, coluna), linha, coluna));
                     passarVezJogador();
                 } else {
                     System.out.println("Não é possível escolher a peça do outro oponente!");
                 }
             }
-
             
-            
-
         }
 
     }

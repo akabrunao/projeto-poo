@@ -11,41 +11,35 @@ package xadrez;
  * @author Daniele
  */
 public class Peao extends Peca {
-	
+
 	/**
 	 * Construtor do cavalo, responsavel por inicializar os atributos e definir a
 	 * posicao inicial da peca no inicio do jogo.
 	 * 
-	 * @param cor  Cor da peca (branca/preta)
+	 * @param cor Cor da peca (branca/preta)
 	 */
-	public Peao(String cor) {		
-		if(cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta"){
+	public Peao(String cor) {
+		if (cor.toLowerCase() == "branca" || cor.toLowerCase() == "preta") {
 			this.capturada = false;
-                    setCor(cor);
-                    desenha();
-                } else {
-                    System.out.println("Cor atribuída é inválida!");
-                }
+			this.cor = cor;
+			desenha();
+		} 
 	}
 
 	/**
-	 * De acordo com a cor da peça define qual o desenho deve ser
-         * impresso no tabuleiro.
+	 * De acordo com a cor da peça define qual o desenho deve ser impresso no
+	 * tabuleiro.
 	 */
-	public void desenha() {
+	protected void desenha() {
 		if (this.cor == "branca") {
 			this.desenho = "p";
 		} else if (this.cor == "preta") {
 			this.desenho = "P";
-		} else {
-			System.out.println("Cor inválida!");
-		}
+		} 
 	}
 
-	
 	/**
-	 * Checa se a posicao informada pelo jogador pertence ao tabuleiro, e entao
-	 * verifica se o movimento é valido de acordo com as regras da peca
+	 * Checa se a peca pode executar o movimento informado pelo usuario
 	 * 
 	 * @param linhaOrigem   A linha da posicao que a peca estava
 	 * @param colunaOrigem  A coluna da posicao que a peca estava
@@ -54,15 +48,18 @@ public class Peao extends Peca {
 	 * @return true caso o movimento seja valido, false se o movimento for invalido
 	 */
 	public boolean checaMovimento(int linhaOrigem, int colunaOrigem, int linhaDestino, int colunaDestino) {
-		if(linhaOrigem == linhaDestino && colunaOrigem == colunaDestino) return false;		
+		if (linhaOrigem == linhaDestino && colunaOrigem == colunaDestino)
+			return false;
 
 		if (cor == "branca") {
-			return ((colunaOrigem == colunaDestino || (Math.abs(colunaOrigem - colunaDestino) == 1 && linhaOrigem - linhaDestino == 1)) && ((linhaOrigem - linhaDestino == 1) || (linhaOrigem == 6 && linhaOrigem - linhaDestino == 2)));
+			return ((colunaOrigem == colunaDestino
+					|| (Math.abs(colunaOrigem - colunaDestino) == 1 && linhaOrigem - linhaDestino == 1))
+					&& ((linhaOrigem - linhaDestino == 1) || (linhaOrigem == 6 && linhaOrigem - linhaDestino == 2)));
 		} else {
-			return ((colunaOrigem == colunaDestino || (Math.abs(colunaOrigem - colunaDestino) == 1 && linhaOrigem - linhaDestino == -1)) && ((linhaOrigem - linhaDestino == -1) || (linhaOrigem == 1 && linhaOrigem - linhaDestino == -2)));
+			return ((colunaOrigem == colunaDestino
+					|| (Math.abs(colunaOrigem - colunaDestino) == 1 && linhaOrigem - linhaDestino == -1))
+					&& ((linhaOrigem - linhaDestino == -1) || (linhaOrigem == 1 && linhaOrigem - linhaDestino == -2)));
 		}
 	}
-	
 
-	
 }

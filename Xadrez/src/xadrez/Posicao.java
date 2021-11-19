@@ -38,10 +38,8 @@ public class Posicao {
 	}
 
 	public void setLinha(int linha) {
-		if (linha >= 0 && linha <= 7){
+		if (linha >= 0 && linha <= 7) {
 			this.linha = linha;
-		} else {
-			System.out.println("Linha inválida!");
 		}
 	}
 
@@ -50,10 +48,8 @@ public class Posicao {
 	}
 
 	public void setColuna(int coluna) {
-		if (coluna >= 0 && coluna <= 7){
+		if (coluna >= 0 && coluna <= 7) {
 			this.coluna = coluna;
-		} else {
-			System.out.println("Coluna inválida!");
 		}
 	}
 

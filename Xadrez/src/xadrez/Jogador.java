@@ -6,7 +6,7 @@
 package xadrez;
 
 /**
- * Classe respons�vel por criar os dois jogadores junto com suas pe�as
+ * Classe responsavel por manter os atributos do jogador e guardar as peças
  *
  * @author Daniele
  */
@@ -20,9 +20,7 @@ public class Jogador {
     public Jogador(String cor) {
         if(cor == "branca" || cor == "preta"){
              this.cor = cor;
-        } else {
-            System.out.println("Cor inválida!");
-        }
+        } 
     }
 
     public Peca[] getPecas() {
@@ -32,9 +30,7 @@ public class Jogador {
     public void setPeca(Peca[] p) {
         if(p[0].getCor() == this.cor){
             this.pecas = p;
-        } else {
-            System.out.println("Jogador não pode receber peças da cor oposta a sua!");
-        }
+        } 
     }
 
     public String getCor() {

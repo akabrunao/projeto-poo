@@ -19,31 +19,26 @@ public class Bispo extends Peca {
 	 */
 	public Bispo(String cor) {
 		if (cor.toLowerCase().equals("branca") || cor.toLowerCase().equals("preta")) {
-			setCor(cor);
+			this.cor = cor;
 			this.capturada = false;
 			desenha();
-		} else {
-			System.out.println("Cor escolhida é inválida!");
-		}
+		} 
 	}
 
 	/**
 	 * De acordo com a cor da peça define qual o desenho deve ser
-         * impresso no tabuleiro.
+	 * impresso no tabuleiro.
 	 */
-	public void desenha() {
+	protected void desenha() {
 		if (this.cor == "branca") {
 			this.desenho = "b";
 		} else if (this.cor == "preta") {
 			this.desenho = "B";
-		} else {
-			System.out.println("Cor inválida!");
-		}
+		} 
 	}
 
 	/**
-	 * Checa se a posicao informada pelo jogador pertence ao tabuleiro, e entao
-	 * verifica se o movimento é valido de acordo com as regras da peca
+	 * Checa se a peca pode executar o movimento informado pelo usuario
 	 * 
 	 * @param linhaOrigem   A linha da posicao que a peca estava
 	 * @param colunaOrigem  A coluna da posicao que a peca estava
