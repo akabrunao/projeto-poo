@@ -1,24 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xadrez;
 
+import pecas.Peca;
+
 /**
- * Classe que armazena todas as informações de cada função
+ * Classe que armazena atributos e métodos de cada posição
  *
  * @author Bruno
  */
 public class Posicao {
 	private String cor;
 	private int linha;
-	private int coluna;
+	private char coluna;
 	private Peca peca;
-	private String desenho;
 	private boolean ocupada;
 
-	public Posicao(int linha, int coluna, String cor) {
+	public Posicao(int linha, char coluna, String cor) {
 		this.setOcupada(false);
 		this.setLinha(linha);
 		this.setColuna(coluna);
@@ -43,12 +39,12 @@ public class Posicao {
 		}
 	}
 
-	public int getColuna() {
+	public char getColuna() {
 		return coluna;
 	}
 
-	public void setColuna(int coluna) {
-		if (coluna >= 0 && coluna <= 7) {
+	public void setColuna(char coluna) {
+		if (coluna >= 'a' && coluna <= 'h') {
 			this.coluna = coluna;
 		}
 	}
@@ -68,14 +64,6 @@ public class Posicao {
 		} else {
 			this.setOcupada(true);
 		}
-	}
-
-	public String getDesenho() {
-		return desenho;
-	}
-
-	public void setDesenho(String desenho) {
-		this.desenho = desenho;
 	}
 
 	public boolean getOcupada() {
